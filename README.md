@@ -52,13 +52,13 @@ https://www.figma.com/file/mqFEAK1kBKENVrBeT7s82P/Capstone?node-id=0%3A1
 
 # Schema
 
-HTTP Verb|	Name	|Description	                                 |User stories
----------|--------------|------------------------------------------------| 
-POST	 |shoes	        |Add a shoe to a user's collection	         |2
-DELETE	 |shoes/id	|Remove a shoe from a user's collection          |2
-GET	 |shoes	        |Fetch the list of shoe's in a user's collection |2, 4
-POST	 |users	        |Create a new user account	                 |3
-PUT	 |users/id	|Update user's profile data	                 |4
+HTTP Verb|	Name	|Description	                                 |User stories |
+---------|--------------|------------------------------------------------|-------------|
+POST	 |shoes	        |Add a shoe to a user's collection	         |2	       |
+DELETE	 |shoes/id	|Remove a shoe from a user's collection          |2	       |
+GET	 |shoes	        |Fetch the list of shoe's in a user's collection |2, 4         |
+POST	 |users	        |Create a new user account	                 |3            |
+PUT	 |users/id	|Update user's profile data	                 |4            |
 
 # Project_Plan
 
