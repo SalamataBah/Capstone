@@ -13,7 +13,7 @@ M&M( Match and Meet) is a website that helps students match and meet with a ment
 
 # Product_specs
 
-User Stories: [] (https://github.com/SalamataBah/Capstone-User-Stories)
+User Stories: [ ] (https://github.com/SalamataBah/Capstone-User-Stories)
 
 
 
