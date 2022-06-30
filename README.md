@@ -104,8 +104,8 @@ Week 3 - The goal of this week is to meet all required features and ensure that 
 	- [ ] Office Hours	
 	- [ ] How can we differentiate mentees and mentors?? 
 - [ ] Thursday
-	- [ ] 
-	- [ ] 
+	- [ ] Debug??
+	- [ ] Fix??
 - [ ] Friday 
 	- [ ] Fix any roadblock 
 	- [ ] Finish set goals 
