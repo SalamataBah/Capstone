@@ -17,9 +17,9 @@ User Stories: https://github.com/SalamataBah/Capstone-User-Stories
 
 Core/Must-have Features:
 
-- []
-- []
-- []
+- [ ]
+- [ ]
+- [ ]
 
 
 
