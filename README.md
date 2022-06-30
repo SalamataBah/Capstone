@@ -1,7 +1,7 @@
 ## Documentation
 
-* [Overview](#overview)
-* [Product Specs]
-* [Wireframes]
-* [Schema]
+* [Overview](#Overview)
+* [Product Specs](#Product_specs)
+* [Wireframes](#Wireframes)
+* [Schema](#Schema)
 	
