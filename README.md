@@ -1,6 +1,6 @@
 ## Documentation
 
-* [Overview]
+* [Overview](#overview)
 * [Product Specs]
 * [Wireframes]
 * [Schema]
