@@ -70,7 +70,7 @@ PUT	 |		|				                 |             |
       		| 					         |	       |
 	        |						 |	       |
 	        |				                 |             |
-		|		
+			
 # Networking
 
 List of network requests by screen
