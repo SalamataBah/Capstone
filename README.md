@@ -1,157 +1,70 @@
-## Documentation
+# Getting Started with Create React App
 
-* [Overview](#Overview)
-* [Product Specs](#Product_specs)
-* [Wireframes](#Wireframes)
-* [Schema](#Schema)
-* [Project_Plan](#Project_Plan)
-	
-# Overview
-Description 
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-M&M( Match and Meet) is a website that helps students match and meet with a mentor
+## Available Scripts
 
+In the project directory, you can run:
 
-# Product_specs
+### `npm start`
 
-User Stories: https://github.com/SalamataBah/Capstone-User-Stories
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-Core/Must-have Features:
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-- [ ] Your app provides multiple opportunities for you to overcome difficult/ambiguous technical problems
-	- [ ]  Write a matching algorithm that can also auto suggest mentors 
-	- [ ]  Fetch Data from LinkedIn API to create user profiles and pull out information
-	- [ ]  View Mentor's Profile 
-	- [ ]  Search for someone 
-	- [ ]  Translate Search input in many languages 
-	- [ ]  Post/Comment/Like posts
-	- [ ]  Chat Feature
+### `npm test`
 
-- [ ] Your app interacts with a database 
-	- [ ] 	Back4App or Firebase
-- [ ] You can log in/log out of your app as a user
-	- [ ] Implement a UI/UX for log in with a name or email and a password
-- [ ] You can sign up with a new user profile
-	- [ ] Users can sign up with Google/Facebook/LinkedIn Apis
-- [ ] Your app has an interesting cursor interaction (e.g. a custom tooltip on hover)
-- [ ] Your app demonstrates at least one component with complex visual styling (done by you, from scratch)
-- [ ] Your app uses a loading state to create visual polish
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-Stretch/Optional Features:
-- [ ] Having a very polished UI
-- [ ] Having a great App Idea that could be a real product
-- [ ] Resources Tab to see Scholarships and Opportunities
+### `npm run build`
 
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-# Wireframes
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-https://www.figma.com/file/mqFEAK1kBKENVrBeT7s82P/Capstone?node-id=0%3A1
-<img width="1195" alt="Screen Shot 2022-06-30 at 1 36 58 AM" src="https://user-images.githubusercontent.com/57270552/176632331-1b2b41e6-1414-4e65-95d2-2d7b035a1a5b.png">
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
+### `npm run eject`
 
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-# Schema
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-# Endpoints
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-HTTP Verb|	Name	|Description	                                 |User stories |
----------|--------------|------------------------------------------------|-------------|
-POST	 |	        |					         |	       |
-DELETE	 |      	| 					         |	       |
-GET	 |	        |						 |	       |
-POST	 |	        |				                 |             |
-PUT	 |		|				                 |             |
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-# Data Model
+## Learn More
 
- column name	|Description	                                 |type         |
- --------------	|------------------------------------------------|-------------|
-tbd	        |					         |	       |
-tbd     	| 					         |	       |
-tbd	        |						 |	       |
-tbd	        |				                 |             |
-			
-# Networking
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-List of network requests by screen
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-- HomeFeed
-	- GET will query ...
-	- POST will query ...
-- CreatePost
-	- GET will query ...
-	- POST will query ...
-- DirectMessage 
-	- GET will query ...
-	- POST will query ...
-- ProfileScreen
-	- GET will query ...
-	- POST will query ...
+### Code Splitting
 
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-# Project_Plan
+### Analyzing the Bundle Size
 
-Week 1 - The goal of this week is to build the main frontend of the website and authenticate the users. Any technical problem will addressed to manager or during office hours.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-- [x] Monday - Holiday 
-- [ ] Tuesday 
-	- [ ] Build the frontend of the home page (Header, Hero, About, Contact, Footer), FAQs, Success Stories Pages
-	- [ ] Build Login and Sign Up Buttons
-	- [ ] Build the Chat, Notifications, Share location buttons  
-- [ ] Wednesday 
-	- [ ] Build the Login and Sign Up Pages 
-	- [ ] Integrate the authentication with Facebook and Google and LinkedIn APIs
-	- [ ] Create the user profiles for the user and mentor
-	- [ ] Office Hours	
-- [ ] Thursday
-	- [ ] Create the Mentorship page where users can filter and find mentors (this include the search input)
-	- [ ] Create the feed page where users can see posts and comment and like them
-- [ ] Friday 
-	- [ ] Fix any roadblock 
-	- [ ] Finish set goals 
+### Making a Progressive Web App
 
-Week 2 - The goal of this week is to add functionalities to the frontend and start connecting the backend. Any technical problem will addressed to manager or during office hours.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-- [ ] Monday
-	- [ ] Office Hours 
-	- [ ] Write matching algorithm connected to find Mentor Button
-- [ ] Tuesday 
-	- [ ] Pull Data from LinkedIn Api 
-	- [ ] Use Parse4Data or Firebase to store data
-- [ ] Wednesday 
-	- [ ] Office Hours	
-	- [ ] Display Search results 
-- [ ] Thursday
-	- [ ] Allow User to contact mentor
-	- [ ] Allow User to share location on Google maps
-- [ ] Friday 
-	- [ ] Fix any roadblock 
-	- [ ] Finish set goals 
+### Advanced Configuration
 
-Week 3 - The goal of this week is to meet all required features and ensure that they are fully functioning. Any technical problem will addressed to manager or during office hours.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-- [ ] Monday
-	- [ ] Office Hours 
-	- [ ] Implement Chat Features
-- [ ] Tuesday 
-	- [ ] Search Translation feature implemented 
-	- [ ] test matching algorithm is fully function. Can it auto suggest mentors based on user's chosen filters.
-- [ ] Wednesday 
-	- [ ] Office Hours	
-	- [ ] How can we differentiate mentees and mentors?? 
-- [ ] Thursday
-	- [ ] Debug??
-	- [ ] Fix??
-- [ ] Friday 
-	- [ ] Fix any roadblock 
-	- [ ] Finish set goals 
+### Deployment
 
-Week 4 - the goal of this week is to fix any ongoing issue, and hit optional features
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-Week 5 - The goal os this week is to polish code and UI 
+### `npm run build` fails to minify
 
-Week 6 - Ensure that all core features are met and website is fully functionning and hosted
-
-Week 7 - Prepare and present project
-
-
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
