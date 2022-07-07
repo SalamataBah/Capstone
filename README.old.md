@@ -41,6 +41,7 @@ Stretch/Optional Features:
 - [ ] Having a very polished UI
 - [ ] Having a great App Idea that could be a real product
 - [ ] Resources Tab to see Scholarships and Opportunities
+- [ ] Build the Chat, Notifications, Share location buttons  
 
 
 # Wireframes
@@ -96,24 +97,22 @@ Week 1 - The goal of this week is to build the main frontend of the website and 
 - [x] Monday - Holiday 
 - [ ] Tuesday 
 	- [ ] Build the frontend of the home page (Header, Hero, About, Contact, Footer), FAQs, Success Stories Pages
-	- [ ] Build Login and Sign Up Buttons
-	- [ ] Build the Chat, Notifications, Share location buttons  
 - [ ] Wednesday 
 	- [ ] Build the Login and Sign Up Pages 
-	- [ ] Integrate the authentication with Facebook and Google and LinkedIn APIs
-	- [ ] Create the user profiles for the user and mentor
-	- [ ] Office Hours	
+	- [ ] Build More frontend components
 - [ ] Thursday
-	- [ ] Create the Mentorship page where users can filter and find mentors (this include the search input)
-	- [ ] Create the feed page where users can see posts and comment and like them
+	- [ ] Integrate the authentication with  LinkedIn APIs
+	- [ ] Build Login and Sign Up Buttons
 - [ ] Friday 
 	- [ ] Fix any roadblock 
+	- [ ] Create the user profiles for the user and mentor
 	- [ ] Finish set goals 
 
 Week 2 - The goal of this week is to add functionalities to the frontend and start connecting the backend. Any technical problem will addressed to manager or during office hours.
 
 - [ ] Monday
 	- [ ] Office Hours 
+	- [ ] Create the Mentorship page where users can filter and find mentors (this include the search input)
 	- [ ] Write matching algorithm connected to find Mentor Button
 - [ ] Tuesday 
 	- [ ] Pull Data from LinkedIn Api 
