@@ -6,7 +6,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 
 const App = () => {
-  console.log("test");
   return (
     <div className="App">
       <BrowserRouter>
