@@ -5,7 +5,7 @@ import "./Logo.css";
 export default function Logo() {
   return (
     <div className="logo">
-      <Link to="/">
+      <Link to="/home">
         <img src="./src/images/logo.png" alt="meet and match" />
       </Link>
     </div>
