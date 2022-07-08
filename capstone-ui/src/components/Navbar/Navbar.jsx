@@ -3,7 +3,6 @@ import "./Navbar.css";
 import Logo from "../Logo/Logo";
 
 const Navbar = () => {
-  console.log("nav");
   return (
     <div className="navbar">
       <div className="navbar-links">
@@ -29,7 +28,13 @@ const Navbar = () => {
         </div>
         <div className="navbar-login">
           <button type="button"> Sign up </button>
-          <button type="button"> Log in </button>
+          <button
+            type="button"
+            onClick="https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=86dtifyah43uj5&redirect_uri=https%3A%2F%2Fwww.google.com%2F&state=salamata&scope=r_liteprofile"
+          >
+            {" "}
+            Log in{" "}
+          </button>
         </div>
       </div>
     </div>
