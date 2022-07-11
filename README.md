@@ -54,6 +54,8 @@ https://www.figma.com/file/mqFEAK1kBKENVrBeT7s82P/Capstone?node-id=0%3A1
 # Schema
 
 # Endpoints
+<img width="1337" alt="Screen Shot 2022-07-11 at 11 16 41 AM" src="https://user-images.githubusercontent.com/57270552/178331138-a5fda7b4-75a3-4f9a-bdcb-5b723855cdbe.png">
+<img width="825" alt="image" src="https://user-images.githubusercontent.com/57270552/178331243-516a2258-86a0-4726-a6a1-9c9606ca3bdc.png">
 
 HTTP Verb|	Name	|Description	                                 |User stories |
 ---------|--------------|------------------------------------------------|-------------|
