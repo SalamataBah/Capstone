@@ -1,6 +1,7 @@
 import React from "react";
 import "./Navbar.css";
 import Logo from "../Logo/Logo";
+import ProfileCard from "../ProfileCard/ProfileCard";
 
 const Navbar = () => {
   return (
@@ -28,13 +29,17 @@ const Navbar = () => {
         </div>
         <div className="navbar-login">
           <button type="button"> Sign up </button>
-          <button
-            type="button"
-            onClick="https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=86dtifyah43uj5&redirect_uri=https%3A%2F%2Fwww.google.com%2F&state=salamata&scope=r_liteprofile"
-          >
-            {" "}
-            Log in{" "}
+          <button type="button" onClick={this.requestProfile}>
+            Log in
           </button>
+          {this.state.isAuthorized && (
+            <ProfileCard
+              firstName={this.state.firstName}
+              lastName={this.state.lastName}
+              profileURL={this.state.profileURL}
+              pictureURL={this.state.pictureURL}
+            />
+          )}
         </div>
       </div>
     </div>
