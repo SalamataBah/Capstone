@@ -1,9 +1,12 @@
 import React from "react";
 import "./Navbar.css";
 import Logo from "../Logo/Logo";
-import ProfileCard from "../ProfileCard/ProfileCard";
 
-const Navbar = () => {
+function Navbar({ isLoggedIn, handleLogout }) {
+  const onClick = (event) => {
+    event.preventDefault();
+    handleLogout();
+  };
   return (
     <div className="navbar">
       <div className="navbar-links">
@@ -28,21 +31,16 @@ const Navbar = () => {
           </p>
         </div>
         <div className="navbar-login">
-          <button type="button"> Sign up </button>
-          <button type="button" onClick={this.requestProfile}>
+          <button type="button" onClick={""}>
+            Sign up
+          </button>
+          <button type="button" onClick={""}>
             Log in
           </button>
-          {this.state.isAuthorized && (
-            <ProfileCard
-              firstName={this.state.firstName}
-              lastName={this.state.lastName}
-              profileURL={this.state.profileURL}
-              pictureURL={this.state.pictureURL}
-            />
-          )}
         </div>
       </div>
     </div>
   );
-};
+}
+
 export default Navbar;
