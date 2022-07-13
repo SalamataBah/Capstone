@@ -1,17 +1,27 @@
 {
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "morgan": "^1.10.0",
+    "parse": "^3.4.3"
+  },
   "name": "capstone-backend",
+  "description": "* [Overview](#Overview) * [Product Specs](#Product_specs) * [Wireframes](#Wireframes) * [Schema](#Schema) * [Project_Plan](#Project_Plan)",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SalamataBah/capstone-project.git"
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "react-scripts": "^5.0.1"
-  }
+  "bugs": {
+    "url": "https://github.com/SalamataBah/capstone-project/issues"
+  },
+  "homepage": "https://github.com/SalamataBah/capstone-project#readme",
+  "keywords": []
 }
