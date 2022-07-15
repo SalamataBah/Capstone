@@ -2,8 +2,9 @@ import * as React from "react";
 import "./SignUp.css";
 import axios from "axios";
 import * as config from "../../config";
+import LinkedinLogin from "../LinkedinLogin/LinkedinLogin";
 
-export default function SignUp({ handleLogin }) {
+export default function SignUp({ handleLogin, goToLogin }) {
   const username = React.createRef();
   const password = React.createRef();
   const email = React.createRef();
@@ -28,22 +29,32 @@ export default function SignUp({ handleLogin }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="title">Register</div>
-      <label>
-        <span>Email</span>
-        <input type="email" ref={email}></input>
-      </label>
-      <label>
-        <span>Username</span>
-        <input ref={username}></input>
-      </label>
-      <label>
-        <span>Password</span>
-        <input type="password" ref={password}></input>
-      </label>
-
-      <button type="submit">Register</button>
-    </form>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <div className="signUp">Register</div>
+        <label className="form-input">
+          <span>Email</span>
+          <input type="email" ref={email}></input>
+        </label>
+        <label className="form-input">
+          <span>Username</span>
+          <input ref={username}></input>
+        </label>
+        <label className="form-input">
+          <span>Password</span>
+          <input type="password" ref={password}></input>
+        </label>
+        <button type="submit" className="button">
+          Register
+        </button>
+      </form>
+      <LinkedinLogin />
+      <p>
+        Already Have an Account?{" "}
+        <button className="button" type="submit" onClick={goToLogin}>
+          Log In
+        </button>
+      </p>
+    </div>
   );
 }

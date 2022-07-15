@@ -1,9 +1,9 @@
 import * as React from "react";
 import Login from "../Login/Login";
 import SignUp from "../SignUp/SignUp";
-import "./LoggedOutView";
+import "./LogOutView";
 
-export default function LoggedOutView({ handleLogin }) {
+export default function LogOutView({ handleLogin }) {
   return (
     <div>
       <Login handleLogin={handleLogin} />
