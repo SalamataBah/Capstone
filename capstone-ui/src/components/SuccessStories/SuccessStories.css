@@ -1,0 +1,11 @@
+.successStories{
+    background-color: var(--color-bg);
+    color: var(--color-text);
+   text-align: center;
+}
+
+.successStories h1{
+   color: var(--color-text);
+   background-color: var(--color-bg);
+   text-align: center;
+}

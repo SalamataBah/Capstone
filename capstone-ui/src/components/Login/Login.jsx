@@ -17,7 +17,9 @@ export default function Login({ handleLogin }) {
           username: username.current.value,
           password: password.current.value,
         });
+        console.log("username: ", username.current.value);
         handleLogin(res.data.user);
+        console.log("res.data.user: ", res.data.user.username);
       } catch (err) {
         alert(err);
         console.log(err);
@@ -27,17 +29,21 @@ export default function Login({ handleLogin }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="title">Login</div>
-      <label>
-        <span>Username</span>
-        <input ref={username}></input>
-      </label>
-      <label>
-        <span>Password</span>
-        <input type="password" ref={password}></input>
-      </label>
-      <button type="submit">Login</button>
-    </form>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <div className="login">Login</div>
+        <label className="form-input">
+          <span>Username</span>
+          <input ref={username}></input>
+        </label>
+        <label className="form-input">
+          <span>Password</span>
+          <input type="password" ref={password}></input>
+        </label>
+        <button type="submit" className="button">
+          Login
+        </button>
+      </form>
+    </div>
   );
 }

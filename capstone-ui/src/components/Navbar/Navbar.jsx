@@ -1,6 +1,7 @@
 import React from "react";
 import "./Navbar.css";
 import Logo from "../Logo/Logo";
+import { Link } from "react-router-dom";
 
 function Navbar({ isLoggedIn, handleLogout }) {
   const onClick = (event) => {
@@ -14,29 +15,29 @@ function Navbar({ isLoggedIn, handleLogout }) {
           <Logo />
         </div>
         <div className="navbar-container">
-          <p>
-            <a href="#home">Home</a>
-          </p>
-          <p>
-            <a href="#about">About</a>
-          </p>
-          <p>
-            <a href="#faqs">FAQs</a>
-          </p>
-          <p>
-            <a href="#successStories">Success Stories</a>
-          </p>
-          <p>
-            <a href="#contact">Contact</a>
-          </p>
+          <Link to="/home">Home</Link>
+          <Link to="/about">About</Link>
+          <Link to="/faqs">FAQs</Link>
+          <Link to="/successStories">Success Stories</Link>
+          <Link to="/contact">Contact</Link>
         </div>
         <div className="navbar-login">
-          <button type="button" onClick={""}>
-            Sign up
-          </button>
-          <button type="button" onClick={""}>
-            Log in
-          </button>
+          <Link className="button" to="/register">
+            Sign Up
+          </Link>
+          <Link className="button" to="/login">
+            Log In
+          </Link>
+          {isLoggedIn && (
+            <Link
+              className="button"
+              target="_blank"
+              to="/logout"
+              onClick={onClick}
+            >
+              Log Out
+            </Link>
+          )}
         </div>
       </div>
     </div>
