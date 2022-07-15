@@ -98,13 +98,13 @@ Week 1 - The goal of this week is to build the main frontend of the website and 
 
 - [x] Monday - Holiday 
 - [ ] Tuesday 
-	- [ ] Build the frontend of the home page (Header, Hero, About, Contact, Footer), FAQs, Success Stories Pages
+	- [x] Build the frontend of the home page (Header, Hero, About, Contact, Footer), FAQs, Success Stories Pages
 - [ ] Wednesday 
-	- [ ] Build the Login and Sign Up Pages 
-	- [ ] Build More frontend components
+	- [x] Build the Login and Sign Up Pages 
+	- [x] Build More frontend components
 - [ ] Thursday
 	- [ ] Integrate the authentication with  LinkedIn APIs
-	- [ ] Build Login and Sign Up Buttons
+	- [x] Build Login and Sign Up Buttons
 - [ ] Friday 
 	- [ ] Fix any roadblock 
 	- [ ] Create the user profiles for the user and mentor
@@ -118,10 +118,10 @@ Week 2 - The goal of this week is to add functionalities to the frontend and sta
 	- [ ] Write matching algorithm connected to find Mentor Button
 - [ ] Tuesday 
 	- [ ] Pull Data from LinkedIn Api 
-	- [ ] Use Parse4Data or Firebase to store data
+	- [x] Use Parse4Data or Firebase to store data
 - [ ] Wednesday 
 	- [ ] Office Hours	
-	- [ ] Display Search results 
+	- [x] Display Search results 
 - [ ] Thursday
 	- [ ] Allow User to contact mentor
 	- [ ] Allow User to share location on Google maps
