@@ -9,26 +9,20 @@ const ProfileCard = ({ handleLogin }) => {
   const username = React.createRef();
   const password = React.createRef();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    const login = async () => {
-      try {
-        console.log("Logging in");
-        const res = await axios.post(`${config.API_BASE_URL}/login`, {
-          username: username.current.value,
-          password: password.current.value,
-        });
-        console.log("username: ", username.current.value);
-        handleLogin(res.data.user);
-        console.log("res.data.user: ", res.data.user.username);
-      } catch (err) {
-        alert(err);
-        console.log(err);
-      }
-    };
-    login();
+  const login = async () => {
+    try {
+      console.log("Logging in");
+      const res = await axios.post(`${config.API_BASE_URL}/login`, {
+        username: username.current.value,
+        password: password.current.value,
+      });
+      console.log("username: ", username.current.value);
+      handleLogin(res.data.user);
+    } catch (err) {
+      alert(err);
+    }
   };
+  login();
 
   return (
     <div className="profile">

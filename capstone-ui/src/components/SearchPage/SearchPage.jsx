@@ -23,7 +23,6 @@ export default function SearchPage() {
         }
       );
   }, []);
-  console.log("data:", mentors.data);
   if (error) {
     return <div>Error: {error.message}</div>;
   } else if (!isLoaded) {

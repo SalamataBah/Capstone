@@ -13,21 +13,13 @@ export default function LinkedinLogin() {
     window.open(
       oauthUrl,
       "Linkedin",
-      "menubar=no,location=no,resizable=no,scrollbars=no,status=no, width=" +
-        width +
-        ", height=" +
-        height +
-        ", top=" +
-        top +
-        ", left=" +
-        left
+      `menubar=no,location=no,resizable=no,scrollbars=no,status=no, width=${width}, height=${height}, top=${top}, left=${left}`
     );
   };
   return (
     <div>
       <button className="button" onClick={() => requestProfile()}>
-        {" "}
-        Sign In With Linkedin{" "}
+        Sign In With Linkedin
       </button>
     </div>
   );
