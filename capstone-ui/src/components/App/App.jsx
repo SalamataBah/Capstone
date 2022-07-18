@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "../../../src/components/Navbar/Navbar";
 import Header from "../Header/Header";
 import About from "../About/About";
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import "./App.css";
 import _ from "lodash";
 import Login from "../Login/Login";
@@ -10,12 +10,9 @@ import { useState } from "react";
 import axios from "axios";
 import SignUp from "../SignUp/SignUp";
 import Home from "../Home/Home";
-import Contact from "../Contact/Contact";
-import Footer from "../Footer/Footer";
 import Faqs from "../FAQs/FAQs";
 import SuccesStories from "../SuccessStories/SuccessStories";
 import ProfileCard from "../ProfileCard/ProfileCard";
-import Parse from "parse/dist/parse.min.js";
 
 function App() {
   const navigate = useNavigate();
@@ -55,8 +52,6 @@ function App() {
     <div className="App">
       <main>
         <Navbar isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
-        <Header />
-        <About />
 
         {isLoggedIn && <ProfileCard />}
         <Routes>
@@ -64,16 +59,23 @@ function App() {
           <Route path="/header" element={<Header />} />
           <Route path="/home" element={<Home />} />
           <Route
+            path="/about"
+            element={
+              <>
+                <About isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
+              </>
+            }
+          />
+          <Route path="/faqs" element={<Faqs />} />
+          <Route path="/successStories" element={<SuccesStories />} />
+
+          <Route
             path="/register"
             element={<SignUp handleLogin={handleLogin} goToLogin={goToLogin} />}
           />
 
           <Route path="/login" element={<Login handleLogin={handleLogin} />} />
         </Routes>
-        <Faqs />
-        <SuccesStories />
-        <Contact />
-        <Footer />
       </main>
     </div>
   );

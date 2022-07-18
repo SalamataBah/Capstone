@@ -19,7 +19,6 @@ export default function Login({ handleLogin }) {
         });
         console.log("username: ", username.current.value);
         handleLogin(res.data.user);
-        console.log("res.data.user: ", res.data.user.username);
       } catch (err) {
         alert(err);
         console.log(err);
