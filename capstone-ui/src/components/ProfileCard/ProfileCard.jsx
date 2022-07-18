@@ -5,9 +5,9 @@ import axios from "axios";
 import * as config from "../../config";
 import { createRef } from "react";
 
-const ProfileCard = ({ handleLogin }) => {
-  const username = React.createRef();
-  const password = React.createRef();
+const ProfileCard = ({ handleLogin, firstName }) => {
+  const username = createRef();
+  const password = createRef();
 
   const login = async () => {
     try {
@@ -16,7 +16,6 @@ const ProfileCard = ({ handleLogin }) => {
         username: username.current.value,
         password: password.current.value,
       });
-      console.log("username: ", username.current.value);
       handleLogin(res.data.user);
     } catch (err) {
       alert(err);
@@ -31,10 +30,9 @@ const ProfileCard = ({ handleLogin }) => {
         <img src={""} alt="" height="10px" width="100px" />
         <h1>
           <a href={""} target="_blank">
-            {} {}
+            {firstName} {""}
           </a>
         </h1>
-        <h2>{}</h2>
       </div>
       <SearchPage />
     </div>

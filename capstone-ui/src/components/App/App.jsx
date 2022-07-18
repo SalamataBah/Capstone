@@ -6,7 +6,7 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import "./App.css";
 import _ from "lodash";
 import Login from "../Login/Login";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import SignUp from "../SignUp/SignUp";
 import Home from "../Home/Home";
@@ -16,10 +16,28 @@ import ProfileCard from "../ProfileCard/ProfileCard";
 
 function App() {
   const navigate = useNavigate();
-  const [userInfo, setUserInfo] = useState("");
+  const [firstName, setFirsName] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(
     localStorage.getItem("current_user_id") != null
   );
+
+  const updateProfile = (profile) => {
+    setFirsName({
+      firstName: _.get(profile, "localizedFirstName", ""),
+    });
+  };
+  useEffect(() => {
+    window.addEventListener("message", handlePostMessage);
+  }, []);
+  const handlePostMessage = (event) => {
+    if (event.data.type === "profile") {
+      updateProfile(event.data.profile);
+      alert.success(
+        `Login successful: ${event.data.profile.localizedFirstName}`,
+        { position: "top" }
+      );
+    }
+  };
 
   const addAuthenticationHeader = () => {
     const currentUserId = localStorage.getItem("current_user_id");
@@ -41,8 +59,6 @@ function App() {
     localStorage.setItem("current_user_id", user["objectId"]);
     addAuthenticationHeader();
     setIsLoggedIn(true);
-    setUserInfo(user);
-    console.log("name", user.username);
   };
 
   const goToLogin = () => {
@@ -53,7 +69,7 @@ function App() {
       <main>
         <Navbar isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
 
-        {isLoggedIn && <ProfileCard />}
+        {isLoggedIn && <ProfileCard firstName={firstName} />}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/header" element={<Header />} />
@@ -75,6 +91,10 @@ function App() {
           />
 
           <Route path="/login" element={<Login handleLogin={handleLogin} />} />
+          <Route
+            path="/profile"
+            element={<ProfileCard firstName={firstName} />}
+          />
         </Routes>
       </main>
     </div>

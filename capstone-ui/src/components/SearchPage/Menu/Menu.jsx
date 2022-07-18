@@ -3,6 +3,8 @@ import Multiselect from "multiselect-react-dropdown";
 import "./Menu.css";
 
 export default function Menu() {
+  // Dropdown might be limiting, so rethinking if it is neccessary to have one.
+  // will remove this comment later
   const menuItems = [
     {
       title: "Skills",
@@ -72,37 +74,36 @@ export default function Menu() {
           onRemove={function noRefCheck() {}}
           onSearch={function noRefCheck() {}}
           onSelect={function noRefCheck() {}}
-          datSource={menuItems}
-          //   options={[
-          //     {
-          //       category: "Area of Interest",
-          //       key: "Engineering",
-          //     },
-          //     {
-          //       category: "Area of Interest",
-          //       key: "UX&Design",
-          //     },
-          //     {
-          //       category: "Area of Interest",
-          //       key: "Data Science",
-          //     },
-          //     {
-          //       category: "Area of Interest",
-          //       key: "Business&Management",
-          //     },
-          //     {
-          //       category: "Area of Interest",
-          //       key: "Product&Marketing",
-          //     },
-          //     {
-          //       category: "Skills",
-          //       key: "Option 6",
-          //     },
-          //     {
-          //       category: "Area of Interest",
-          //       key: "Option 7",
-          //     },
-          //   ]}
+          options={[
+            {
+              category: "Area of Interest",
+              key: "Engineering",
+            },
+            {
+              category: "Area of Interest",
+              key: "UX&Design",
+            },
+            {
+              category: "Area of Interest",
+              key: "Data Science",
+            },
+            {
+              category: "Area of Interest",
+              key: "Business&Management",
+            },
+            {
+              category: "Area of Interest",
+              key: "Product&Marketing",
+            },
+            {
+              category: "Skills",
+              key: "Option 6",
+            },
+            {
+              category: "Area of Interest",
+              key: "Option 7",
+            },
+          ]}
           showCheckbox
         />
       </div>
