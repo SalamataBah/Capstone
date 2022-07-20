@@ -15,14 +15,13 @@ export default function SearchPage() {
   useEffect(() => {
     axios.get(`https://api-staging.codingcoach.io/mentors`).then((response) => {
       setMentors(response.data);
-      console.log("response: ", response);
     });
   }, []);
 
   const handleSearch = (searchValue) => {
     setSearchInput(searchValue);
     if (searchInput != "") {
-      const filteredData = mentors.filter((mentor) => {
+      const filteredData = mentors.data.filter((mentor) => {
         return Object.values(mentor)
           .join("")
           .toLowerCase()
@@ -33,7 +32,37 @@ export default function SearchPage() {
       setFilteredResults(mentors);
     }
   };
-  console.log("mentorData: ", mentors);
+  const content =
+    searchInput.length > 1
+      ? filteredResults?.map((mentor) => {
+          return (
+            <div className="mentor-grid">
+              <button className="country-location">{mentor.country}</button>
+              <a className="avatar" href={mentor.avatar}></a>
+              <button className="like-button">Add to Favorite</button>
+              <h2 className="name">{mentor.name}</h2>
+              <h4 className="role">{mentor.title}</h4>
+              {/* <p className="bio">{mentor.description}</p>
+              <button className="tags">{mentor.tags}</button> */}
+              <button>Get Connected</button>
+            </div>
+          );
+        })
+      : mentors?.data?.map((mentor) => {
+          return (
+            <div className="mentor-grid">
+              <button className="country-location">{mentor.country}</button>
+              <a className="avatar" href={mentor.avatar}></a>
+              <button className="like-button">Add to Favorite</button>
+              <h2 className="name">{mentor.name}</h2>
+              <h4 className="role">{mentor.title}</h4>
+              {/* <p className="bio">{mentor.description}</p>
+              <button className="tags">{mentor.tags}</button> */}
+              <button>Get Connected</button>
+            </div>
+          );
+        });
+
   return (
     <div className="search-bar">
       <h1>Find a Mentor</h1>
@@ -44,69 +73,7 @@ export default function SearchPage() {
           value={searchInput}
         />
       </div>
-
-      {searchInput.length > 1
-        ? filteredResults.map((mentor) => {
-            console.log("filteredResults: ", filteredResults);
-            return <div>{mentor.name}</div>;
-          })
-        : mentors.data.map((mentor) => {
-            return <div> {mentor.name}</div>;
-          })}
+      {content}
     </div>
   );
 }
-//   const handleSearch = (e) => {
-//     const keyword = e.target.value;
-//     if (keyword !== "") {
-//       const results = mentors.filter((mentor) => {
-//         return mentor.searchInput
-//           .toLowerCase()
-//           .startsWith(keyword.toLowerCase());
-//       });
-
-//       setMentors(results);
-//     } else {
-//       setMentors(mentors);
-//     }
-
-//     setsearchInput(keyword);
-//   };
-
-//   useEffect(() => {
-//     fetch("https://api-staging.codingcoach.io/mentors")
-//       .then((res) => res.json())
-//       .then(
-//         (result) => {
-//           setIsLoaded(true);
-//           setMentors(result);
-//         },
-//         (error) => {
-//           setIsLoaded(true);
-//           setError(error);
-//         }
-//       );
-//   }, []);
-//   if (error) {
-//     return <div>Error: {error.message}</div>;
-//   } else if (!isLoaded) {
-//     return <div>Loading...</div>;
-//   } else {
-//     return (
-//       <div className="main">
-//         <div className="search-bar">
-//           <h1>Find a Mentor</h1>
-//           <div className="search">
-//             <input
-//               placeholder="Search for a mentor"
-//               onChange={handleSearch}
-//               value={searchInput}
-//             />
-//           </div>
-//         </div>
-//         <Menu />
-//         <MentorCard mentors={mentors} />
-//       </div>
-//     );
-//   }
-// }
