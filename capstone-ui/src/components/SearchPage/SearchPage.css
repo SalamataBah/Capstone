@@ -18,3 +18,22 @@ h1 {
     border-radius: 30px;
 }
 
+.mentor-grid{
+    display: grid;
+    background-color: rgb(24, 30, 66);
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    color: var(--color-text);
+    grid-template-columns:  1fr 1fr 1fr 1fr;
+}
+.results{
+    color: var(--color-text);
+    background-color: rgb(18, 47, 235);
+    width: 150px;
+    grid-template-columns:  1fr 1fr 1fr 1fr;
+}
+
+.country-location{
+    border-radius: 20px;
+}
