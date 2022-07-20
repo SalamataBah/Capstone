@@ -16,28 +16,9 @@ import ProfileCard from "../ProfileCard/ProfileCard";
 
 function App() {
   const navigate = useNavigate();
-  const [firstName, setFirsName] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(
     localStorage.getItem("current_user_id") != null
   );
-
-  const updateProfile = (profile) => {
-    setFirsName({
-      firstName: _.get(profile, "localizedFirstName", ""),
-    });
-  };
-  useEffect(() => {
-    window.addEventListener("message", handlePostMessage);
-  }, []);
-  const handlePostMessage = (event) => {
-    if (event.data.type === "profile") {
-      updateProfile(event.data.profile);
-      alert.success(
-        `Login successful: ${event.data.profile.localizedFirstName}`,
-        { position: "top" }
-      );
-    }
-  };
 
   const addAuthenticationHeader = () => {
     const currentUserId = localStorage.getItem("current_user_id");
@@ -69,7 +50,7 @@ function App() {
       <main>
         <Navbar isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
 
-        {isLoggedIn && <ProfileCard firstName={firstName} />}
+        {isLoggedIn && <ProfileCard />}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/header" element={<Header />} />
@@ -91,10 +72,7 @@ function App() {
           />
 
           <Route path="/login" element={<Login handleLogin={handleLogin} />} />
-          <Route
-            path="/profile"
-            element={<ProfileCard firstName={firstName} />}
-          />
+          <Route path="/profile" element={<ProfileCard />} />
         </Routes>
       </main>
     </div>
