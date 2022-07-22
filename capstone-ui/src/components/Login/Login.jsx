@@ -2,8 +2,9 @@ import * as React from "react";
 import "./Login.css";
 import axios from "axios";
 import * as config from "../../config";
+import { useEffect } from "react";
 
-export default function Login({ handleLogin }) {
+export default function Login({ handleLogin, goToProfile }) {
   const username = React.createRef();
   const password = React.createRef();
 
@@ -31,15 +32,15 @@ export default function Login({ handleLogin }) {
     <div>
       <form onSubmit={handleSubmit}>
         <div className="login">Login</div>
-        <label className="form-input">
+        <label className="form-input" id="username">
           <span>Username</span>
           <input ref={username}></input>
         </label>
-        <label className="form-input">
+        <label className="form-input" id="password">
           <span>Password</span>
           <input type="password" ref={password}></input>
         </label>
-        <button type="submit" className="button">
+        <button type="submit" className="button" onClick={goToProfile}>
           Login
         </button>
       </form>

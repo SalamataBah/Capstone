@@ -4,10 +4,24 @@ import SearchPage from "../SearchPage/SearchPage";
 import axios from "axios";
 import * as config from "../../config";
 import { createRef } from "react";
+import { useEffect, useState } from "react";
 
 const ProfileCard = ({ handleLogin }) => {
   const username = createRef();
   const password = createRef();
+
+  const [userProfile, setUserProfile] = useState({});
+
+  useEffect(() => {
+    getUserInfo();
+  }, []);
+
+  const getUserInfo = async () => {
+    const response = await axios.get(`${config.API_BASE_URL}/userProfile`);
+    console.log("response: ", response);
+    setUserProfile(response.data);
+  };
+  console.log("userProfile: ", userProfile.username);
 
   const login = async () => {
     try {
@@ -26,7 +40,7 @@ const ProfileCard = ({ handleLogin }) => {
   return (
     <div className="profile">
       <div className="profile-container">
-        <p className="welcome-user"> Welcome</p>
+        <p className="welcome-user"> Welcome{userProfile.username}</p>
         <img src={""} alt="" height="10px" width="100px" />
         <h1>
           <a href={""} target="_blank">

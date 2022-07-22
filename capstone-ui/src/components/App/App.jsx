@@ -13,12 +13,26 @@ import Home from "../Home/Home";
 import Faqs from "../FAQs/FAQs";
 import SuccesStories from "../SuccessStories/SuccessStories";
 import ProfileCard from "../ProfileCard/ProfileCard";
+import * as config from "../../config";
 
 function App() {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(
     localStorage.getItem("current_user_id") != null
   );
+
+  // const getUserInfo = async () => {
+  //   await axios
+  //     .get(`${config.API_BASE_URL}/userProfile`, {
+  //       username: document.getElementById("username"),
+  //     })
+  //     .then(function (response) {
+  //       console.log(response);
+  //     })
+  //     .catch(function (err) {
+  //       console.log(err);
+  //     });
+  // };
 
   const addAuthenticationHeader = () => {
     const currentUserId = localStorage.getItem("current_user_id");
@@ -45,6 +59,11 @@ function App() {
   const goToLogin = () => {
     navigate("/login");
   };
+
+  const goToProfile = () => {
+    navigate("/profile");
+  };
+
   return (
     <div className="App">
       <main>
@@ -71,7 +90,12 @@ function App() {
             element={<SignUp handleLogin={handleLogin} goToLogin={goToLogin} />}
           />
 
-          <Route path="/login" element={<Login handleLogin={handleLogin} />} />
+          <Route
+            path="/login"
+            element={
+              <Login handleLogin={handleLogin} goToProfile={goToProfile} />
+            }
+          />
           <Route path="/profile" element={<ProfileCard />} />
         </Routes>
       </main>

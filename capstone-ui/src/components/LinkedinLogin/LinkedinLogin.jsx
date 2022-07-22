@@ -17,7 +17,6 @@ export default function LinkedinLogin() {
   }, []);
 
   const handlePostMessage = (event) => {
-    console.log("event: ", event);
     if (event.data.type === "profile") {
       updateProfile(event.data.profile);
       console.log("event.data.profile: ", event.data.profile);
