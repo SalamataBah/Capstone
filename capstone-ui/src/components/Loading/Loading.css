@@ -1,0 +1,10 @@
+.loading-state {
+    margin: auto;
+    align-items: center;
+
+}
+
+.loading-text {
+    color: var(--color-text);
+    font-size: 50px;
+}

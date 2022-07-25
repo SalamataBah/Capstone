@@ -2,7 +2,7 @@
     color: var(--color-text);
     text-align: center;
 }
-.form-input{
-    color: var(--color-text);
+.login-input{
+    color: black;
     
 }

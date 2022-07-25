@@ -3,11 +3,7 @@ import "./Navbar.css";
 import Logo from "../Logo/Logo";
 import { Link } from "react-router-dom";
 
-function Navbar({ isLoggedIn, handleLogout }) {
-  const onClick = (event) => {
-    event.preventDefault();
-    handleLogout();
-  };
+function Navbar({ isLoggedIn, onClickLogOut }) {
   return (
     <div className="navbar">
       <div className="navbar-links">
@@ -33,7 +29,7 @@ function Navbar({ isLoggedIn, handleLogout }) {
               className="button"
               target="_blank"
               to="/logout"
-              onClick={onClick}
+              onClick={onClickLogOut}
             >
               Log Out
             </Link>
