@@ -1,0 +1,33 @@
+{
+    "skills": [
+        {
+            "category" : "Programming Languages",
+            "options" : [
+                "JavaScript",
+                "Python",
+                "C",
+                "C#",
+                "C++",
+                "Pearl"
+            ]
+        },
+        {
+            "category" : "Business",
+            "options" : [
+                "Communication",
+                "",
+                ""
+            ]
+        },
+        {
+            "category" : "Data Science",
+            "options" : [
+                "Billiards/Pool",
+                "Poker",
+                "Board Games"
+            ]
+        }
+
+
+    ]
+}
