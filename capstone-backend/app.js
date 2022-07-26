@@ -4,6 +4,7 @@ const cors = require('cors')
 const Parse = require('parse/node')
 const {PARSE_APP_ID, PARSE_JAVASCRIPT_KEY} = require('./config')
 const app = express()
+const fs = require('fs')
 
 app.use(express.json())
 app.use(morgan("tiny"))
@@ -81,12 +82,26 @@ app.post('/profile', async (req, res) => {
 
   try {
       const currentUser = Parse.User.current();
+      console.log('currentUser: ', currentUser);
       if (currentUser) {
           if (infoUser.role && infoUser.role != "") {
               currentUser.set("role", infoUser.role);
           }
+          if (infoUser.bio && infoUser.bio != "") {
+            currentUser.set("bio", infoUser.bio);
+          }
+          if (infoUser.location && infoUser.location != "") {
+            currentUser.set("bio", infoUser.location);
+          }
+          if (infoUser.major && infoUser.major != "") {
+            currentUser.set("major", infoUser.major);
+          }
+          if (infoUser.roles) {
+            currentUser.set("roles", infoUser.roles);
+          }
           
           await currentUser.save()
+          console.log('currentUser: ', currentUser);
           res.send({ userInfo: currentUser, saveInfoMessage: "User info saved!", typeStatus: "success", infoUser: infoUser });
       } else {
           res.send({ userInfo: "", saveInfoMessage: "No user found", typeStatus: "danger", infoUser: infoUser });
@@ -102,7 +117,11 @@ app.get('/profile/interests', async(req, res) => {
   const currentUser = Parse.User.current();
   if (currentUser){
     const userSkills = await getInterestQuery(currentUser, "Skills");
-    res.send({skills: userSkills})
+    const skillsData = fs.readFileSync('data/skills.json');
+    console.log('skillsData: ', skillsData);
+    const skillsJson = await JSON.parse(skillsData)
+    console.log('skillsJson: ', skillsJson);
+    res.send({skills: userSkills, skillsJson: skillsJson.skills, message: "got user interests ", typeStatus:"success" })
   }
   else{
     res.send({message: "no user found!", typeStatus: "danger"})
@@ -115,15 +134,29 @@ app.post ('/profile/interests', async (req, res) => {
   try{
     const Skills = Parse.Object.extend("Skills");
     const skills = new Skills();
+    const skillsData = fs.readFileSync('data/skills.json');
+    const skillsJson = await JSON.parse(skillsData)
 
     const currentUser = Parse.User.current();
     if (currentUser){
       if (infoInterests.interests.skills){
         const query = new Parse.Query(Skills);
         query.equalTo("User", currentUser);
-        query.equalTo("name", interests.skills.name);
+        query.equalTo("name", infoInterests.interests.skills.name);
         const results = await query.find();
+        console.log('results: ', results);
         if (!results[0]){
+          let userSkills = skillsJson.skills[infoInterests.interests.skills.skillIndex];
+          if (!userSkills.options.includes(infoInterests.interests.skills.name)){
+            userSkills.options.push(infoInterests.interests.skills.name);
+            skillsJson.skills[infoInterests.interests.skills.skillIndex] = userSkills;
+            const result = JSON.stringify(skillsJson);
+            fs.writeFile('data/skills.json', result, error => {
+              if (error){
+                throw error
+              }
+            })
+          }
           skills.set("name", infoInterests.interests.skills.name)
           skills.set("category", infoInterests.interests.skills.category)
           let relations = skills.relation('User');
