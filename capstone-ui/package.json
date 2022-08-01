@@ -23,7 +23,8 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "react-select": "^5.4.0",
-    "semantic-ui-react": "^2.1.3"
+    "semantic-ui-react": "^2.1.3",
+    "Companies" : "/Users/salamatabah/Desktop/capstone-project/capstone-backend/data/companies.json"
   },
   "scripts": {
     "start": "react-scripts start",

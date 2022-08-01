@@ -1,0 +1,37 @@
+.card {
+    max-height: 870px;
+    background-color: var(--color-text);
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 100px;
+    border-radius: 20px;
+    padding: 5px;
+}
+
+.card-text{
+    color: var(--color-text);
+    text-align: center;
+}
+
+.match-interests {
+    display: inline;
+}
+
+.match-movies~.match-movies::before {
+    content: ', ';
+}
+
+.match-shows~.match-shows::before {
+    content: ', ';
+}
+
+.match-hobbies~.match-hobbies::before {
+    content: ', ';
+}
+
+.media-carousel {
+    max-width: 200px;
+    border-radius: 10px;
+}

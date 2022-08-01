@@ -11,12 +11,14 @@ import axios from "axios";
 import SignUp from "../SignUp/SignUp";
 import Home from "../Home/Home";
 import Faqs from "../FAQs/FAQs";
+import Contact from "../Contact/Contact";
 import SuccesStories from "../SuccessStories/SuccessStories";
 import ProfileCard from "../Profile/ProfileCard/ProfileCard";
 import * as config from "../../config";
 import ProfileEdit from "../Profile/ProfileEdit/ProfileEdit";
 import Interests from "../Profile/Interests/Interests";
 import InterestEdit from "../Profile/InterestEdit/InterestEdit";
+import Match from "../Match/Match";
 
 function App() {
   const navigate = useNavigate();
@@ -28,10 +30,140 @@ function App() {
   console.log("userInfo: ", userInfo);
 
   const [skillsJson, setSkillsJson] = useState("");
-  console.log("skillsJson: ", skillsJson);
   const [newSkill, setNewSkill] = useState(null);
   const [selectedSkill, setSelectedSkill] = useState(null);
 
+  const [company, setCompany] = useState("");
+  console.log("company: ", company);
+  const [language, setLanguage] = useState("");
+
+  function getCompany() {
+    const companyValue = document.getElementById("add-company");
+    const companyInput = companyValue?.value || "";
+    setCompany(companyInput);
+  }
+
+  async function getLanguage() {
+    const queryInput = document.getElementById("add-language");
+    const queryValue = queryInput?.value || "";
+    const options = {
+      method: "GET",
+      headers: {
+        "X-RapidAPI-Key": "e1dc640022mshb32006c77e1acb7p1c1665jsnbea1abbff153",
+        "X-RapidAPI-Host": "world-countries.p.rapidapi.com",
+      },
+    };
+
+    const res = await fetch(
+      "https://world-countries.p.rapidapi.com/dz",
+      options
+    )
+      .then((response) => response.json())
+      .catch((err) => console.error(err));
+    console.log("res: ", res);
+  }
+  getLanguage();
+
+  const [matches, setMatches] = useState([]);
+  const [offset, setOffset] = useState(0);
+  const matchLimit = 2;
+  const [fetchMatch, setFetchMatch] = useState(false);
+
+  // useEffect(() => {
+  //   if (window.localStorage.getItem("userInfo") && userInfo.interests) {
+  //     if (matches.length === 0 && !fetchMatch) {
+  //       createMatch({});
+  //     }
+  //     getMatches(matchLimit + offset, 0);
+  //   }
+  // }, [userInfo]);
+
+  // useEffect(() => {
+  //   setIsLoading(true);
+  //   if (window.performance) {
+  //     if (
+  //       window.localStorage.getItem("userInfo") &&
+  //       !userInfo &&
+  //       String(window.performance.getEntriesByType("navigation")[0].type) ===
+  //         "reload"
+  //     ) {
+  //       refreshPage();
+  //     }
+  //   }
+  //   setIsLoading(false);
+  // }, []);
+
+  const goToMatch = () => {
+    if (matches.length === 0) {
+      getMatches(matchLimit, 0);
+      createMatch({});
+    }
+    navigate("/profile/match");
+  };
+
+  async function getMatches(limit, offset) {
+    await axios
+      .get(`${config.API_BASE_URL}/matches`, {
+        params: {
+          limit: limit,
+          offset: offset,
+        },
+      })
+      .then((response) => {
+        if (response.data.typeStatus == "success") {
+          if (offset == 0) {
+            setMatches(response.data.matchesInfo);
+          } else if (
+            matches.length >= matchLimit &&
+            response.data.matchesInfo[0] &&
+            !matches.includes(response.data.matchesInfo[0])
+          ) {
+            let newMatches = matches.concat(response.data.matchesInfo);
+            setMatches(newMatches);
+          }
+        }
+      });
+  }
+
+  async function createMatch(params) {
+    setFetchMatch(true);
+    if (userInfo && userInfo != 0) {
+      await axios
+        .post(`${config.API_BASE_URL}/matches`, {
+          params: params,
+        })
+        .then(function (response) {
+          console.log("response: ", response);
+        })
+        .catch(function (error) {
+          console.log("error: ", error);
+        });
+    }
+    setFetchMatch(false);
+  }
+  function refreshPage() {
+    setIsLoading(true);
+    const loggedUser = window.localStorage.getItem("userInfo");
+    if (loggedUser) {
+      const currUser = JSON.parse(loggedUser);
+      axios
+        .post(`${config.API_BASE_URL}/login`, {
+          email: currUser.email,
+          username: currUser.username,
+          password: currUser.password,
+        })
+        .then(function (response) {
+          setUserInfo(response.data.userInfo);
+          setMatches([]);
+          setTimeout(getInterests, 300);
+          getMatches(matchLimit, 0);
+          setTimeout(!isLoading, 1000);
+        })
+        .catch(function (error) {
+          console.log("error: ", error);
+        });
+    }
+  }
   const handleLoginParse = async () => {
     window.localStorage.clear();
     setIsLoading(true);
@@ -57,7 +189,10 @@ function App() {
               password: password,
             })
           );
-          navigate("profile");
+          setMatches([]);
+          setSelectedSkill(null);
+          setOffset(0);
+          navigate("/profile");
         }
         setIsLoading(false);
         setIsLoggedIn(true);
@@ -99,7 +234,8 @@ function App() {
   const handleLogout = async () => {
     await axios
       .post(`${config.API_BASE_URL}/logout`, {})
-      .then(function (response) {
+      .then(function () {
+        setMatches([]);
         setUserInfo("");
         window.localStorage.clear();
         navigate("/home");
@@ -113,20 +249,23 @@ function App() {
   };
 
   const goToEditInterests = () => {
+    setLanguage("");
     navigate("/profile/interests/edit");
   };
   const saveInfo = async () => {
     setIsLoading(true);
-    // const roles = [];
-    // if (userInfo.roles) {
-    //   roles = userInfo.roles;
-    // }
+    let roles = [];
+    if (userInfo.roles) {
+      roles = userInfo.roles;
+    }
+    roles.push(document.getElementById("roles").value);
+
     await axios
       .post(`${config.API_BASE_URL}/profile`, {
         major: document.getElementById("major").value,
         bio: document.getElementById("bio").value,
         location: document.getElementById("location").value,
-        // roles: roles,
+        roles: roles,
       })
       .then(function (response) {
         setUserInfo(response.data.userInfo);
@@ -142,19 +281,26 @@ function App() {
     await axios
       .get(`${config.API_BASE_URL}/profile/interests`)
       .then((response) => {
-        if (response.data.skills && userInfo) {
+        console.log("response: ", response);
+        if (userInfo) {
           setSkillsJson(response.data.skillsJson);
+          setCompany(response.data.company);
           setIsLoading(false);
           setUserInfo({
             ...userInfo,
             interests: {
+              languages: response.data.languages,
               skills: response.data.skills,
+              companies: response.data.companies,
             },
           });
           setIsLoading(false);
         } else if (response.data.typeStatus == "danger") {
           setIsLoading(false);
         }
+      })
+      .catch(function (error) {
+        console.log(error);
       });
   }
 
@@ -163,7 +309,9 @@ function App() {
     axios
       .post(`${config.API_BASE_URL}/profile/interests`, {
         interests: {
-          skill: selectedSkill
+          languages: language,
+          companies: company,
+          skills: selectedSkill
             ? selectedSkill.value
             : newSkill
             ? newSkill
@@ -172,8 +320,10 @@ function App() {
       })
       .then(function () {
         getInterests();
-        setIsLoading(false);
         navigate("/profile/interests");
+        setLanguage("");
+        setCompany("");
+        setIsLoading(false);
       })
       .catch(function (error) {
         console.log(error);
@@ -190,11 +340,11 @@ function App() {
     }
   }
 
-  function removeSkill(skill) {
+  function removeSkill(skills) {
     setIsLoading(true);
     axios
       .post(`${config.API_BASE_URL}/profile/interests/remove`, {
-        skill: skill,
+        skills: skills,
       })
       .then(function () {
         getInterests();
@@ -216,8 +366,8 @@ function App() {
   };
 
   const goToInterests = () => {
-    if (!userInfo.interests) {
-      setTimeout(getInterests, 500);
+    if (!userInfo.interests && !isLoading) {
+      getInterests();
     }
     navigate("/profile/interests");
   };
@@ -237,6 +387,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/header" element={<Header />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/contact" element={<Contact />} />
           <Route
             path="/about"
             element={
@@ -288,6 +439,7 @@ function App() {
                 isLoading={isLoading}
                 goToEditInfo={goToEditInfo}
                 setUserInfo={setUserInfo}
+                onClickMatch={goToMatch}
               />
             }
           />
@@ -322,10 +474,30 @@ function App() {
                 onClickProfile={goToProfile}
                 saveInterests={saveInterests}
                 skillsJson={skillsJson}
+                company={company}
+                getCompany={getCompany}
                 addSkill={addSkill}
                 removeSkill={removeSkill}
                 selectedSkill={selectedSkill}
                 setSelectedSkill={setSelectedSkill}
+                language={language}
+                getLanguage={getLanguage}
+              />
+            }
+          />
+          <Route
+            path="/profile/match"
+            element={
+              <Match
+                isLoading={isLoading}
+                setIsLoading={setIsLoading}
+                matches={matches}
+                getMatches={getMatches}
+                offset={offset}
+                setOffset={setOffset}
+                matchLimit={matchLimit}
+                goToMatch={goToMatch}
+                createMatch={createMatch}
               />
             }
           />

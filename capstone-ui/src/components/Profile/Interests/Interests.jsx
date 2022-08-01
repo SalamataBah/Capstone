@@ -24,7 +24,7 @@ export default function Interests({
           </div>
         </div>
         <div className="container">
-          <p className="interests-names">Skills:</p>
+          <p className="interests-names">Skills:{}</p>
           {userInfo?.interests?.skills &&
           Array.isArray(userInfo.interests.skills)
             ? userInfo.interests.skills.map((skill, key) => (
@@ -34,6 +34,24 @@ export default function Interests({
               ))
             : null}
           <br />
+          <p className="interests-name"> Companies:</p>
+          {userInfo?.interests?.companies &&
+          Array.isArray(userInfo.interests.companies)
+            ? userInfo.interests.companies.map((company, key) => (
+                <div key={key} className="skills">
+                  <p className="skills-name">{company.name}</p>
+                </div>
+              ))
+            : null}
+          <p className="interests-name"> Languages:</p>
+          {userInfo?.interests?.languages &&
+          Array.isArray(userInfo.interests.languages)
+            ? userInfo.interests.languages.map((language, key) => (
+                <div key={key} className="skills">
+                  <p className="skills-name">{language.name}</p>
+                </div>
+              ))
+            : null}
           <button className="button" onClick={onEditInterests}>
             Edit
           </button>

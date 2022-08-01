@@ -14,17 +14,38 @@ export default function InterestEdit({
   removeSkill,
   selectedSkill,
   setSelectedSkill,
+  company,
+  removeCompany,
+  getCompany,
+  language,
+  getLanguage,
+  removeLanguage,
 }) {
   const [skillsClass, setSkillsClass] = useState("hidden");
   const [selection, setSelection] = useState("null");
-
-  console.log("skillsJson: ", skillsJson);
+  const [companyClass, setCompanyClass] = useState("hidden");
+  const [languageClass, setLanguageClass] = useState("hidden");
 
   function handleSkillClass() {
     if (skillsClass == "skill-input") {
       setSkillsClass("hidden");
     } else {
       setSkillsClass("skill-input");
+    }
+  }
+
+  function handleCompanyClass() {
+    if (companyClass == "skill-input") {
+      setCompanyClass("hidden");
+    } else {
+      setCompanyClass("skill-input");
+    }
+  }
+  function handleLanguageClass() {
+    if (languageClass == "skill-input") {
+      setLanguageClass("hidden");
+    } else {
+      setLanguageClass("skill-input");
     }
   }
 
@@ -45,6 +66,82 @@ export default function InterestEdit({
           </div>
         </div>
         <div className="container">
+          <p className="skills">Companies:</p>
+          {userInfo?.interests?.companies &&
+          Array.isArray(userInfo.interests.companies)
+            ? userInfo.interests.companies.map((company, key) => (
+                <div key={key} className="skills">
+                  <p className="skills-name">{company.name}</p>
+                  <p
+                    className="skills-name remove-skills"
+                    onClick={() => {
+                      removeCompany(getCompany);
+                    }}
+                  >
+                    X
+                  </p>
+                </div>
+              ))
+            : null}
+          <br />
+          {companyClass == "hidden" ? (
+            <div>
+              <button className="button" onClick={handleCompanyClass}>
+                Add a company
+              </button>{" "}
+            </div>
+          ) : (
+            <input
+              placeholder="enter your company of interest"
+              type="text"
+              className={companyClass}
+              id="add-company"
+              onChange={getCompany}
+            ></input>
+          )}{" "}
+          {company && company != "" ? (
+            <div className="skills">
+              <p className="skills-name">{company.name}</p>{" "}
+            </div>
+          ) : null}
+          <p className="skills">Languages:</p>
+          {userInfo?.interests?.languages &&
+          Array.isArray(userInfo.interests.languages)
+            ? userInfo.interests.languages.map((language, key) => (
+                <div key={key} className="skills">
+                  <p className="skills-name">{language.name}</p>
+                  <p
+                    className="skills-name remove-skills"
+                    onClick={() => {
+                      removeLanguage(language);
+                    }}
+                  >
+                    X
+                  </p>
+                </div>
+              ))
+            : null}
+          <br />
+          {languageClass == "hidden" ? (
+            <div>
+              <button className="button" onClick={handleLanguageClass}>
+                Add a language
+              </button>{" "}
+            </div>
+          ) : (
+            <input
+              placeholder="enter your company of interest"
+              type="text"
+              className={languageClass}
+              id="add-language"
+              onChange={getLanguage}
+            ></input>
+          )}{" "}
+          {language && language != "" ? (
+            <div className="skills">
+              <p className="skills-name">{language.name}</p>{" "}
+            </div>
+          ) : null}
           <p className="skills">Skills:</p>
           {userInfo?.interests?.skills &&
           Array.isArray(userInfo.interests.skills)
@@ -120,7 +217,6 @@ export default function InterestEdit({
             className="button"
             onClick={() => {
               saveInterests();
-              setSelectedSkill(null);
             }}
           >
             Save

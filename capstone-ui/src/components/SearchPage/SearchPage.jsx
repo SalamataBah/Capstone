@@ -4,16 +4,19 @@ import MentorCard from "./MentorCard/MentorCard";
 import Menu from "./Menu/Menu";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import * as config from "../../config";
 
 export default function SearchPage() {
-  const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
   const [mentors, setMentors] = useState([]);
+  console.log("mentors: ", mentors);
   const [searchInput, setSearchInput] = useState("");
+  console.log("searchInput: ", searchInput);
+
   const [filteredResults, setFilteredResults] = useState([]);
 
   useEffect(() => {
-    axios.get(`https://api-staging.codingcoach.io/mentors`).then((response) => {
+    axios.get(`${config.API_BASE_URL}/matches`).then((response) => {
+      console.log("response: ", response);
       setMentors(response.data);
     });
   }, []);
@@ -22,6 +25,7 @@ export default function SearchPage() {
     setSearchInput(searchValue);
     if (searchInput != "") {
       const filteredData = mentors.data.filter((mentor) => {
+        console.log("filteredData: ", filteredData);
         return Object.values(mentor)
           .join("")
           .toLowerCase()
@@ -32,36 +36,40 @@ export default function SearchPage() {
       setFilteredResults(mentors);
     }
   };
-  const content =
-    searchInput.length > 1
-      ? filteredResults?.map((mentor) => {
-          return (
-            <div className="mentor-grid">
-              <button className="country-location">{mentor.country}</button>
-              <a className="avatar" href={mentor.avatar}></a>
-              <button className="like-button">Add to Favorite</button>
-              <h2 className="name">{mentor.name}</h2>
-              <h4 className="role">{mentor.title}</h4>
-              {/* <p className="bio">{mentor.description}</p>
-              <button className="tags">{mentor.tags}</button> */}
-              <button>Get Connected</button>
-            </div>
-          );
-        })
-      : mentors?.data?.map((mentor) => {
-          return (
-            <div className="mentor-grid">
-              <button className="country-location">{mentor.country}</button>
-              <a className="avatar" href={mentor.avatar}></a>
-              <button className="like-button">Add to Favorite</button>
-              <h2 className="name">{mentor.name}</h2>
-              <h4 className="role">{mentor.title}</h4>
-              {/* <p className="bio">{mentor.description}</p>
-              <button className="tags">{mentor.tags}</button> */}
-              <button>Get Connected</button>
-            </div>
-          );
-        });
+  // const content =
+  //   searchInput.length > 1
+  //     ? filteredResults?.map((mentor) => {
+  //         return (
+  //           <div className="mentor-grid">
+  //             <button className="country-location">
+  //               {mentor.usersInfo.user_1}
+  //             </button>
+  //             {/* <a className="avatar" href={mentor.avatar}></a> */}
+  //             {/* <button className="like-button">Add to Favorite</button>
+  //             <h2 className="name">{mentor.usersInfo}</h2>
+  //             <h4 className="role">{mentor.title}</h4>
+  //             {/* <p className="bio">{mentor.description}</p>
+  //             <button className="tags">{mentor.tags}</button> */}
+  //             <button>Get Connected</button>
+  //           </div>
+  //         );
+  //       })
+  //     : mentors?.data?.map((mentor) => {
+  //         return (
+  //           <div className="mentor-grid">
+  //             <button className="country-location">
+  //               {mentor.usersInfo.user_1}
+  //             </button>
+  //             {/* <a className="avatar" href={mentor.avatar}></a>
+  //             <button className="like-button">Add to Favorite</button>
+  //             <h2 className="name">{mentor.name}</h2>
+  //             <h4 className="role">{mentor.title}</h4>
+  //             {/* <p className="bio">{mentor.description}</p>
+  //             <button className="tags">{mentor.tags}</button> */}
+  //             <button>Get Connected</button>
+  //           </div>
+  //         );
+  //       });
 
   return (
     <div className="search-bar">
@@ -73,7 +81,7 @@ export default function SearchPage() {
           value={searchInput}
         />
       </div>
-      {content}
+      {/* {content} */}
     </div>
   );
 }
