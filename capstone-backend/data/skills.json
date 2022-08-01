@@ -15,16 +15,16 @@
             "category" : "Business",
             "options" : [
                 "Communication",
-                "",
-                ""
+                "Collaboration",
+                "Management"
             ]
         },
         {
             "category" : "Data Science",
             "options" : [
-                "Billiards/Pool",
-                "Poker",
-                "Board Games"
+                "Data Mining",
+                "Jupyter Notebook",
+                "Pandas"
             ]
         }
 

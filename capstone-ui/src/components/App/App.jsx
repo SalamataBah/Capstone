@@ -12,8 +12,11 @@ import SignUp from "../SignUp/SignUp";
 import Home from "../Home/Home";
 import Faqs from "../FAQs/FAQs";
 import SuccesStories from "../SuccessStories/SuccessStories";
-import ProfileCard from "../ProfileCard/ProfileCard";
+import ProfileCard from "../Profile/ProfileCard/ProfileCard";
 import * as config from "../../config";
+import ProfileEdit from "../Profile/ProfileEdit/ProfileEdit";
+import Interests from "../Profile/Interests/Interests";
+import InterestEdit from "../Profile/InterestEdit/InterestEdit";
 
 function App() {
   const navigate = useNavigate();
@@ -21,7 +24,13 @@ function App() {
     localStorage.getItem("userInfo") != null
   );
   const [isLoading, setIsLoading] = useState(false);
-  const [userInfo, setUserInfo] = useState("");
+  const [userInfo, setUserInfo] = useState(null);
+  console.log("userInfo: ", userInfo);
+
+  const [skillsJson, setSkillsJson] = useState("");
+  console.log("skillsJson: ", skillsJson);
+  const [newSkill, setNewSkill] = useState(null);
+  const [selectedSkill, setSelectedSkill] = useState(null);
 
   const handleLoginParse = async () => {
     window.localStorage.clear();
@@ -103,11 +112,38 @@ function App() {
       });
   };
 
+  const goToEditInterests = () => {
+    navigate("/profile/interests/edit");
+  };
+  const saveInfo = async () => {
+    setIsLoading(true);
+    // const roles = [];
+    // if (userInfo.roles) {
+    //   roles = userInfo.roles;
+    // }
+    await axios
+      .post(`${config.API_BASE_URL}/profile`, {
+        major: document.getElementById("major").value,
+        bio: document.getElementById("bio").value,
+        location: document.getElementById("location").value,
+        // roles: roles,
+      })
+      .then(function (response) {
+        setUserInfo(response.data.userInfo);
+        navigate("/profile");
+        setIsLoading(false);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   async function getInterests() {
     await axios
       .get(`${config.API_BASE_URL}/profile/interests`)
       .then((response) => {
         if (response.data.skills && userInfo) {
+          setSkillsJson(response.data.skillsJson);
           setIsLoading(false);
           setUserInfo({
             ...userInfo,
@@ -119,6 +155,53 @@ function App() {
         } else if (response.data.typeStatus == "danger") {
           setIsLoading(false);
         }
+      });
+  }
+
+  const saveInterests = () => {
+    setIsLoading(true);
+    axios
+      .post(`${config.API_BASE_URL}/profile/interests`, {
+        interests: {
+          skill: selectedSkill
+            ? selectedSkill.value
+            : newSkill
+            ? newSkill
+            : null,
+        },
+      })
+      .then(function () {
+        getInterests();
+        setIsLoading(false);
+        navigate("/profile/interests");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  function addSkill(category, index) {
+    if (document.getElementById("add-skill")) {
+      setNewSkill({
+        name: document.getElementById("add-skill").value,
+        category: category,
+        index: index,
+      });
+    }
+  }
+
+  function removeSkill(skill) {
+    setIsLoading(true);
+    axios
+      .post(`${config.API_BASE_URL}/profile/interests/remove`, {
+        skill: skill,
+      })
+      .then(function () {
+        getInterests();
+        setIsLoading(false);
+      })
+      .catch(function (error) {
+        console.log(error);
       });
   }
   const goToLogin = () => {
@@ -199,22 +282,12 @@ function App() {
           <Route
             path="/profile"
             element={
-              <ProfileCard
+              <ProfileEdit
                 userInfo={userInfo}
                 onClickInterests={goToInterests}
                 isLoading={isLoading}
                 goToEditInfo={goToEditInfo}
-              />
-            }
-          />
-          <Route
-            path="/profile/interests"
-            element={
-              <ProfileCard
-                userInfo={userInfo}
-                onClickInterests={goToInterests}
-                isLoading={isLoading}
-                goToEditInfo={goToEditInfo}
+                setUserInfo={setUserInfo}
               />
             }
           />
@@ -225,7 +298,34 @@ function App() {
                 userInfo={userInfo}
                 onClickInterests={goToInterests}
                 isLoading={isLoading}
-                goToEditInfo={goToEditInfo}
+                saveInfo={saveInfo}
+              />
+            }
+          />
+          <Route
+            path="/profile/interests"
+            element={
+              <Interests
+                userInfo={userInfo}
+                isLoading={isLoading}
+                onClickProfile={goToProfile}
+                onEditInterests={goToEditInterests}
+              />
+            }
+          />
+          <Route
+            path="/profile/interests/edit"
+            element={
+              <InterestEdit
+                userInfo={userInfo}
+                isLoading={isLoading}
+                onClickProfile={goToProfile}
+                saveInterests={saveInterests}
+                skillsJson={skillsJson}
+                addSkill={addSkill}
+                removeSkill={removeSkill}
+                selectedSkill={selectedSkill}
+                setSelectedSkill={setSelectedSkill}
               />
             }
           />
