@@ -21,18 +21,17 @@ Core/Must-have Features:
 - [ ] Your app provides multiple opportunities for you to overcome difficult/ambiguous technical problems
 	- [ ]  Write a matching algorithm that can also auto suggest mentors 
 	- [ ]  Fetch Data from LinkedIn API to create user profiles and pull out information
-	- [ ]  View Mentor's Profile 
-	- [ ]  Search for someone 
+	- [x]  View Mentor's Profile 
+	- [x]  Search for someone 
 	- [ ]  Translate Search input in many languages 
-	- [ ]  Post/Comment/Like posts
-	- [ ]  Chat Feature
+	- [ ]  Chat Feature (stretch)
 
 - [ ] Your app interacts with a database 
-	- [ ] 	Back4App or Firebase
+	- [x] 	Back4App or Firebase
 - [ ] You can log in/log out of your app as a user
-	- [ ] Implement a UI/UX for log in with a name or email and a password
+	- [x] Implement a UI/UX for log in with a name or email and a password
 - [ ] You can sign up with a new user profile
-	- [ ] Users can sign up with Google/Facebook/LinkedIn Apis
+	- [x] Users can sign up with Google/Facebook/LinkedIn Apis
 - [ ] Your app has an interesting cursor interaction (e.g. a custom tooltip on hover)
 - [ ] Your app demonstrates at least one component with complex visual styling (done by you, from scratch)
 - [ ] Your app uses a loading state to create visual polish
@@ -73,6 +72,9 @@ tbd	        |					         |	       |
 tbd     	| 					         |	       |
 tbd	        |						 |	       |
 tbd	        |				                 |             |
+
+<img width="688" alt="image" src="https://user-images.githubusercontent.com/57270552/182435228-350ccfb6-c5f2-46a4-8d4b-c64fffec830d.png">
+
 			
 # Networking
 
@@ -103,49 +105,49 @@ Week 1 - The goal of this week is to build the main frontend of the website and 
 	- [x] Build the Login and Sign Up Pages 
 	- [x] Build More frontend components
 - [ ] Thursday
-	- [ ] Integrate the authentication with  LinkedIn APIs
+	- [x] Integrate the authentication with  LinkedIn APIs
 	- [x] Build Login and Sign Up Buttons
 - [ ] Friday 
 	- [ ] Fix any roadblock 
-	- [ ] Create the user profiles for the user and mentor
-	- [ ] Finish set goals 
+	- [x] Create the user profiles for the user and mentor
+	- [x] Finish set goals 
 
 Week 2 - The goal of this week is to add functionalities to the frontend and start connecting the backend. Any technical problem will addressed to manager or during office hours.
 
 - [ ] Monday
-	- [ ] Office Hours 
-	- [ ] Create the Mentorship page where users can filter and find mentors (this include the search input)
-	- [ ] Write matching algorithm connected to find Mentor Button
+	- [x] Office Hours 
+	- [x] Create the Mentorship page where users can filter and find mentors (this include the search input)
+	- [x] Write matching algorithm connected to find Mentor Button
 - [ ] Tuesday 
-	- [ ] Pull Data from LinkedIn Api 
+	- [ ] Pull Data from LinkedIn Api (UNABLE)
 	- [x] Use Parse4Data or Firebase to store data
 - [ ] Wednesday 
-	- [ ] Office Hours	
+	- [x] Office Hours	
 	- [x] Display Search results 
 - [ ] Thursday
-	- [ ] Allow User to contact mentor
-	- [ ] Allow User to share location on Google maps
+	- [ ] Allow User to contact mentor (STRETCH)
+	- [ ] Allow User to share location on Google maps (STRETCH)
 - [ ] Friday 
-	- [ ] Fix any roadblock 
-	- [ ] Finish set goals 
+	- [x] Fix any roadblock 
+	- [x] Finish set goals 
 
 Week 3 - The goal of this week is to meet all required features and ensure that they are fully functioning. Any technical problem will addressed to manager or during office hours.
 
 - [ ] Monday
-	- [ ] Office Hours 
-	- [ ] Implement Chat Features
+	- [x] Office Hours 
+	- [ ] Implement Chat Features (STRETCH)
 - [ ] Tuesday 
 	- [ ] Search Translation feature implemented 
-	- [ ] test matching algorithm is fully function. Can it auto suggest mentors based on user's chosen filters.
+	- [x] test matching algorithm is fully function. Can it auto suggest mentors based on user's chosen filters.
 - [ ] Wednesday 
-	- [ ] Office Hours	
-	- [ ] How can we differentiate mentees and mentors?? 
+	- [x] Office Hours	
+	- [x] How can we differentiate mentees and mentors?? 
 - [ ] Thursday
-	- [ ] Debug??
-	- [ ] Fix??
+	- [x] Debug??
+	- [x] Fix??
 - [ ] Friday 
-	- [ ] Fix any roadblock 
-	- [ ] Finish set goals 
+	- [x] Fix any roadblock 
+	- [x] Finish set goals 
 
 Week 4 - the goal of this week is to fix any ongoing issue, and hit optional features
 
