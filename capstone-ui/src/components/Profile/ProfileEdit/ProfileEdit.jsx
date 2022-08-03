@@ -1,12 +1,14 @@
 import React from "react";
 import "./ProfileEdit.css";
 import Loading from "../../Loading/Loading";
+import SearchPage from "../../SearchPage/SearchPage";
 
 export default function ProfileEdit({
   userInfo,
   onClickInterests,
   goToEditInfo,
   isLoading,
+  onClickMatch,
 }) {
   return isLoading ? (
     <Loading></Loading>
@@ -44,6 +46,10 @@ export default function ProfileEdit({
           </button>
         </div>
       </div>
+      <button className="button" onClick={onClickMatch}>
+        Find Your Match{" "}
+      </button>
+      <SearchPage />
     </div>
   );
 }

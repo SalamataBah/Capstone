@@ -10,12 +10,17 @@
 h1 {
     margin: 10px;
     font-size: var(--font-family);
-    color: var(--color-text)
+    color: var(--color-text);
+    text-align:center;
+}
+.search-bar{
+    text-align:center;
 }
 
 .search {
     width: 100%;
     border-radius: 30px;
+    text-align:center;
 }
 
 .mentor-grid{

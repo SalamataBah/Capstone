@@ -1,0 +1,25 @@
+.container{
+    justify-content: center;
+    align-items: center;
+}
+
+.selection{
+    margin-left: 110px;
+    margin-right: 110px;
+}
+
+.skill-input{
+    background-color: white;
+    color: black;
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    border-radius: 10px;
+}
+
+.hidden{
+    visibility: hidden;
+}
+
+.remove-skills{
+    cursor: pointer;
+}
