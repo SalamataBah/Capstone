@@ -17,6 +17,105 @@ app.get("/", (req, res) => {
   res.send("It works!")
 })
 
+app.get('/getUser', async (req, res) => {
+  const query = new Parse.Query("User");
+      try {
+      const userdata = await query.find();
+      res.send(userdata)
+      } catch (error) {
+        res.send(error)
+      }
+  })
+
+  function checkUserInterests(searchVal, interestInfo, usersInfo){
+    const userInfoJson = usersInfo.toJSON();
+    for (let skill of interestInfo.skills) {
+      const jsonSkill = skill.toJSON(); 
+      if (jsonSkill.name?.toLowerCase().includes(searchVal)) {
+        return true;
+      }
+    }
+    for (let company of interestInfo.companies) {
+      const jsonCompany = company.toJSON();
+      if (jsonCompany.name?.toLowerCase().includes(searchVal)) {
+        return true;
+       
+      }
+    }
+    for (let language of interestInfo.languages) {
+      const jsonLanguage = language.toJSON(); 
+      if (jsonLanguage.name?.toLowerCase().includes(searchVal)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+
+
+app.get('/allUsers/:searchInput', async (req, res) => {
+  const searchVal = req.params.searchInput.toLowerCase();
+  try {
+      const query = new Parse.Query("User");
+      const entries = await query.find();
+      let allInfo = []
+      let interestsInfo = []
+      let usersInfo = []
+      for (let i = 0; i < entries.length; i++){
+        const userInfo = entries[i]
+        const interests = await getUserData(userInfo);
+        interestsInfo.push(interests)
+        usersInfo.push(userInfo)
+        allInfo.push({ 
+          userInfo: userInfo, interests: interests
+        })
+      }
+    
+      let allUsersInterests = allInfo.filter((info) => checkUserInterests(searchVal, info.interests, info.userInfo) ) 
+
+      res.send({ message: "table retrieved", allUsersInterests: allUsersInterests,  entries: entries,  typeStatus: "success" });
+  }
+  catch (err) {
+      res.send({ message: "Error retrieving users", typeStatus: "danger" });
+  }
+});
+
+
+
+
+app.get('/allSkills', async (req, res) => {
+  try {
+    const parseQuery = new Parse.Query("Skills");
+    const entries = await parseQuery.find();
+      res.send({ message: "table retrieved", entries: entries, typeStatus: "success" });
+  }
+  catch (err) {
+      res.send({ userTableMessage: "Error getting user table", typeStatus: "danger" });
+  }
+});
+
+app.get('/allCompanies', async (req, res) => {
+  try {
+    const parseQuery = new Parse.Query("Company");
+    const entries = await parseQuery.find();
+      res.send({ message: "table retrieved", entries: entries, typeStatus: "success" });
+  }
+  catch (err) {
+      res.send({ userTableMessage: "Error getting user table", typeStatus: "danger" });
+  }
+});
+
+app.get('/allLanguages', async (req, res) => {
+  try {
+    const parseQuery = new Parse.Query("Language");
+    const entries = await parseQuery.find();
+      res.send({ message: "table retrieved", entries: entries, typeStatus: "success" });
+  }
+  catch (err) {
+      res.send({ userTableMessage: "Error getting user table", typeStatus: "danger" });
+  }
+});
+
 function handleErrorParse(error){
   if (error?.code){
     switch (error.code){
@@ -114,11 +213,8 @@ app.get('/profile/interests', async(req, res) => {
     const skillsJson = await JSON.parse(skillsData)
 
     const userCompanies = await getInterestQuery(currentUser, "Company");
-    console.log('userCompanies: ', userCompanies);
     const companyData = fs.readFileSync('data/companies.json');
-    console.log('companyData: ', companyData);
     const companyJson = await JSON.parse(companyData);
-    console.log('companyJson: ', companyJson);
 
     const userLanguages = await getInterestQuery(currentUser, "Language");
 
@@ -148,8 +244,7 @@ app.post ('/profile/interests', async (req, res) => {
 
     const uiSkills = infoInterests.interests.skills
     const uiCompany = infoInterests.interests.companies
-    console.log('uiCompany: ', uiCompany);
-    const uiLanguage = infoInterests.interests.language
+    const uiLanguage = infoInterests.interests.languages
 
     const currentUser = Parse.User.current();
     if (currentUser){
@@ -159,7 +254,7 @@ app.post ('/profile/interests', async (req, res) => {
         query.equalTo("User1", currentUser);
         query.equalTo("name", uiSkills.name);
         const results = await query.find();
-        if ( !results[0] ){
+        if (!results[0]){
           const optionIndex = uiSkills.index
           let userSkills = skillsJson.skills[optionIndex];
           if (!userSkills.options.includes(uiSkills.name)){
@@ -181,32 +276,31 @@ app.post ('/profile/interests', async (req, res) => {
       }
       let respCompany = null
       if (uiCompany != ""){
-        console.log('uiCompany: ', uiCompany);
         const query = new Parse.Query(Company);
         query.equalTo("User1", currentUser);
-        query.equalTo("name", uiCompany.name);
+        query.equalTo("name", uiCompany);
         const results = await query.find();
-        console.log('results: ', results);
-        if (results.length != 0){
-          company.set("name", uiCompany.name);
+        if (results.length == 0){
+          company.set("name", uiCompany);
           let relations = company.relation("User1");
           relations.add(currentUser);
           respCompany = await company.save()
         }
       }
+      let respLanguage = null
       if (uiLanguage){
         const query = new Parse.Query(Language);
         query.equalTo("User1", currentUser);
-        query.equalTo("name", uiLanguage.name);
+        query.equalTo("name", uiLanguage);
         const results = await query.find();
-        if (!results[0]){
-          language.set("name", uiLanguage.name);
+        if (results.length == 0){
+          language.set("name", uiLanguage);
           let relations = language.relation("User1");
           relations.add(currentUser);
-          await language.save()
+          respLanguage = await language.save()
         }
       }
-      res.send({skills: respSkills, company: respCompany, language: language,  userInfo: currentUser, message: "interests saved!", typeStatus: "success", infoInterests: infoInterests})
+      res.send({skills: respSkills, company: respCompany, language: respLanguage,  userInfo: currentUser, message: "interests saved!", typeStatus: "success", infoInterests: infoInterests})
     } else {
       res.send({skills: null , userInfo: null, message: "cannot find a user currently", typeStatus: "danger", infoInterests: infoInterests})
     }
@@ -225,7 +319,13 @@ app.post('/profile/interests/remove', async (req, res) => {
       if (removeInfo.skills){
         removeInterest("Skills", "name", removeInfo.skills.name, currentUser)
       }
-      res.send({message : "success", removeInfo: removeInfo, result: result[0]})
+      if (removeInfo.company){
+        removeInterest("Company", removeInfo.company, currentUser)
+      }
+      if (removeInfo.language){
+        removeInterest("Language", removeInfo.language, currentUser)
+      }
+      res.send({message : "success", removeInfo: removeInfo, entry: entry[0]})
     }
     else {
       res.send({message : "no user found", typeStatus: "danger"})
@@ -378,7 +478,6 @@ async function getMatches(currentUser){
 
   const Match = Parse.Object.extend("Match");
   let count = 0;
-
   entries.forEach(async entry => {
     const matchInfo = await getUserData(entry);
     const currentUserInfo = await getUserData(currentUser);
@@ -434,7 +533,7 @@ async function getMatchData(limit, offset, currentUser){
     let userId = results[i].get('user_2')
     const newQuery = new Parse.Query(Parse.User);
     newQuery.equalTo("objectId", userId);
-    const userInfo = await query.first();
+    const userInfo = await newQuery.first();
     const interests = await getUserData(userInfo);
 
     usersInfo.push(userInfo)
@@ -456,8 +555,7 @@ async function removeInterest(objectName, itemKey, itemValue, currentUser) {
   query.equalTo(itemKey, itemValue);
   query.equalTo("User1", currentUser);
   const entry = await query.find();
-  console.log('entry: ', entry);
-  entry[0].destroy();
+  entry[0]?.destroy();
 }
 async function  getInterestQuery(currentUser, objectName){
   const Object = await Parse.Object.extend(objectName);
@@ -471,7 +569,18 @@ async function getUserData(user){
   const skillsQuery = new Parse.Query(Skills);
   skillsQuery.equalTo("User1", user);
   const userSkills = await skillsQuery.find();
-  return({skills: userSkills, roles: user.get("roles")})
+
+  const Company = Parse.Object.extend("Company");
+  const compQuery = new Parse.Query(Company);
+  compQuery.equalTo("User1", user);
+  const userCompanies = await compQuery.find();
+
+  const Language = Parse.Object.extend("Language");
+  const langQuery = new Parse.Query(Language);
+  langQuery.equalTo("User1", user);
+  const userLanguages = await langQuery.find();
+
+  return({skills: userSkills, companies: userCompanies, languages:userLanguages,  roles: user.get("roles")})
 }
 
 module.exports = app;
