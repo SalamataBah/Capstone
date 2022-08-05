@@ -11,27 +11,10 @@
 }
 
 .card-text{
-    color: var(--color-text);
+    color: black;
     text-align: center;
 }
 
 .match-interests {
     display: inline;
-}
-
-.match-movies~.match-movies::before {
-    content: ', ';
-}
-
-.match-shows~.match-shows::before {
-    content: ', ';
-}
-
-.match-hobbies~.match-hobbies::before {
-    content: ', ';
-}
-
-.media-carousel {
-    max-width: 200px;
-    border-radius: 10px;
 }

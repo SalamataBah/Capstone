@@ -1,19 +1,28 @@
 import React from "react";
 import "./MentorCard.css";
 
-export default function ({ mentors }) {
+export default function MentorCard({ mentors }) {
+  console.log("mentors: ", mentors);
   return (
     <div className="mentor-grid">
-      {mentors.data.map((mentor) => (
-        <div className="results">
-          <button className="country-location">{mentor.country}</button>
-          <a className="avatar" href={mentor.avatar}></a>
-          <button className="like-button">Add to Favorite</button>
-          <h2 className="name">{mentor.name}</h2>
-          <h4 className="role">{mentor.title}</h4>
-          {/* <p className="bio">{mentor.description}</p> */}
-          {/* <button className="tags">{mentor.tags}</button> */}
-          <button>Get Connected</button>
+      {mentors?.map((match, index) => (
+        <div key={index} className="card">
+          <p className="card-text">Username: {match?.userInfo?.username}</p>
+          <p className="card-text">Location: {match?.userInfo?.location}</p>
+          <p className="card-text">Bio: {match?.userInfo?.bio}</p>
+          <p className="card-text">Major: {match?.userInfo?.major}</p>
+          <p className="card-text">Skills: {match?.userInfo?.skills}</p>
+          {Array.isArray(match?.interestsInfo?.skills) &&
+          match?.interestsInfo?.skills.length > 0 ? (
+            <div>
+              <p className="card-text match-interests"> </p>
+              {match?.interestsInfo?.skills?.map((skill, key) => (
+                <p key={key} className="card-text match-interests match-skills">
+                  {skill.name} {""}
+                </p>
+              ))}
+            </div>
+          ) : null}{" "}
         </div>
       ))}
     </div>

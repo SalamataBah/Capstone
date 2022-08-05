@@ -9,6 +9,8 @@ export default function ProfileEdit({
   goToEditInfo,
   isLoading,
   onClickMatch,
+  onClickSearch,
+  onClickMap,
 }) {
   return isLoading ? (
     <Loading></Loading>
@@ -42,14 +44,19 @@ export default function ProfileEdit({
           </div>
 
           <button className="button" onClick={goToEditInfo}>
-            Edit
+            Edit Profile
           </button>
         </div>
       </div>
       <button className="button" onClick={onClickMatch}>
         Find Your Match{" "}
       </button>
-      <SearchPage />
+      <button className="button" onClick={onClickSearch}>
+        Search For a match{" "}
+      </button>
+      <button className="button" onClick={onClickMap}>
+        Find a Match on a Map{" "}
+      </button>
     </div>
   );
 }
