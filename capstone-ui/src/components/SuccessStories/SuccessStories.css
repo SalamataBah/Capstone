@@ -1,12 +1,84 @@
-/* @import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"; */
 .successStories{
-    background-color: var(--color-bg);
-    color: var(--color-text);
+   min-height: 100vh;
+   width: 100%;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   background-color: #FB8E0B;
+}
+.mainHeading{
+   margin-top: 20px;
+   margin-bottom: 20px;
+   font-size: 38px;
    text-align: center;
+   color: var( --color-text)
+}
+.mainCont{
+   background-color: #FB8E0B;
+   width: 100%;
+   display: flex;
+   justify-content: space-around;
+   padding-bottom: 30px;
+}
+.firstCont{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+
+}
+.txtCont{
+   width: 80%;
+   height:auto;
+   border-radius: 12px;
+   background-color: rgb(255, 255, 255);
+}
+.txtCont h1{
+   color: #FB8E0B;
+   text-align: center;
+}
+.txtCont p{
+   color: rgb(1, 1, 1);
 }
 
-.successStories h1{
-   color: var(--color-text);
-   background-color: var(--color-bg);
-   text-align: center;
+
+.manteeCont{
+   width: auto;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   padding:0 auto;
+   padding-top: 8px;
+   padding-left: 15px;
 }
+.manteeCont h6 ,p {
+   color: white;
+}
+
+@media screen and (max-width: 830px) {
+
+
+.mainCont{
+   background-color: #FB8E0B;
+   width: 100%;
+   display: flex;
+   flex-direction: column;
+}
+.firstCont{
+ margin-bottom: 40px;
+
+}
+.txtCont{
+   width: 80%;
+}
+}
+
+@media screen and (max-width: 550px) {
+
+
+  
+   .txtCont{
+       width: 90%;
+   }
+   }

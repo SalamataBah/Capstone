@@ -1,19 +1,116 @@
-.about-us {
+.about-us{
+    min-height: 100vh;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    
+    justify-content: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    box-shadow:3px 3px 3px 3px   #bdbdbd;
 }
-.about-us h1 {
-    color: var(--color-text)
+.mainHeading{
+    margin-top: 20px;
+    font-size: 38px;
+    text-align: center;
+    color: var(--color-text);
 }
 
-.about-us p {
-    font-size: 12px;
-    line-height: 15px;
-    font-family: var(--font-family);
-    color: var(--color-text);
-    margin: 0.5rem 0;
+.threeDiv {
+    height: auto;
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 20px;
+    padding-bottom: 20px;
     
+}
+.cont1{
+    display: flex;
+    flex-direction: row;
+    width: 30%;
+    margin-top: 20px;
+
+}
+.imgDiv{
+    width: 30%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+}
+img{
+    width: 60px;
+    height: 60px;
+}
+.txtCont{
+    width: 70%;
+    padding-left: 15px;
+}
+.tCont > p , h4{
+    width: 100%;
+    color: var(--color-text);
+    padding-left:15px ;
+}
+
+@media screen and (max-width: 830px) {
+    .mainHeading{
+        margin-top: 15px;
+        font-size: 30px;
+        text-align: center;
+    }
+    
+    .threeDiv {
+        height: auto;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        margin-top: 20px;
+        padding-bottom: 20px;
+        
+    }
+    .cont1{
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+        margin-top: 20px;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+    
+    }
+    .imgDiv{
+        width: 30%;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    img{
+        width: 60px;
+        height: 60px;
+    }
+    .tCont{
+        width: 70%;
+    }
+    .tCont > p ,h4{
+        width: 100%;
+        color: var(--color-text);
+        text-align: center;
+        padding:0px;
+    }
+
+}
+
+@media screen and (max-width: 320px) {
+    .tCont{
+        width: 100%;
+    } 
+    .tCont > p ,h4{
+        padding:none;
+    }
+
 }
