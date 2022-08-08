@@ -61,6 +61,8 @@ export default function Maps(userInfo) {
     lng: -121.996504,
   });
   const { lat, lng } = useMapContext();
+  console.log("lng: ", lng);
+  console.log("lat: ", lat);
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: "AIzaSyDxEDEgIYJMJK4XnwR1h7-zbdU9d2yZ3WY",
