@@ -22,9 +22,11 @@ import Match from "../Match/Match";
 import SearchPage from "../SearchPage/SearchPage";
 import CurrentLocation from "../Maps/currentLocation";
 import Maps from "../Maps/test/marker";
+import { useMapContext } from "../../contexts/MapContext";
 
 function App() {
   const navigate = useNavigate();
+  const { getLocation } = useMapContext();
   const [isLoggedIn, setIsLoggedIn] = useState(
     localStorage.getItem("userInfo") != null
   );
@@ -40,7 +42,7 @@ function App() {
   const [language, setLanguage] = useState("");
 
   const handleResults = (results) => {
-    console.log("results[0].formatted_address: ", results);
+    console.log("My location: ", results);
     <div className="card">{results[0].formatted_address} </div>;
   };
 
@@ -207,6 +209,7 @@ function App() {
           alert("Error with logging in !");
           navigate("/login");
         } else {
+          getLocation();
           setUserInfo(response.data.userInfo);
           console.log("response: ", response);
           window.localStorage.setItem(
@@ -408,11 +411,10 @@ function App() {
   return (
     <div className="App">
       <main>
-        <Maps />
         <Navbar isLoggedIn={isLoggedIn} onClickLogOut={handleLogout} />
 
         {/* {isLoggedIn && (
-          <ProfileCard userInfo={userInfo} onClickLogOut={handleLogout} />
+          <ProfileEdit userInfo={userInfo} onClickLogOut={handleLogout} />
         )} */}
         <Routes>
           <Route path="/" element={<Home />} />
@@ -540,13 +542,23 @@ function App() {
           <Route
             path="/location"
             element={
-              <CurrentLocation onFetchAddress={handleResults} onError={onError}>
-                {({ getCurrentLocation, loading }) => (
-                  <button onClick={getCurrentLocation} disabled={loading}>
-                    Get Current Location
-                  </button>
-                )}
-              </CurrentLocation>
+              <div>
+                <CurrentLocation
+                  onFetchAddress={handleResults}
+                  onError={onError}
+                >
+                  {({ getCurrentLocation, loading }) => (
+                    <button
+                      className="button"
+                      onClick={getCurrentLocation}
+                      disabled={loading}
+                    >
+                      Share my Location
+                    </button>
+                  )}
+                </CurrentLocation>
+                <Maps userInfo={userInfo} />
+              </div>
             }
           />
         </Routes>

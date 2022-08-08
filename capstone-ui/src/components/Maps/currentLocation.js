@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { func } from "prop-types";
+import { useMapContext } from "../../contexts/MapContext";
 
 // it gets the user's location from the browser.
 
@@ -58,16 +59,20 @@ const getGeoLocationError = (error, handleError) => {
   }
 };
 
-const getLocation = (onFetchAddress, handleError) => {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      (position) => getResults(position, onFetchAddress, handleError),
-      (error) => getGeoLocationError(error, handleError)
-    );
-  } else {
-    handleError("geoLocationUnavailable");
-  }
-};
+// const getLocation = (onFetchAddress, handleError) => {
+//   if (navigator.geolocation) {
+//     navigator.geolocation.getCurrentPosition(
+//       (position) => {
+//         console.log("latitude", position.coords.latitude);
+//         console.log("latitude", position.coords.longitude);
+//         getResults(position, onFetchAddress, handleError);
+//       },
+//       (error) => getGeoLocationError(error, handleError)
+//     );
+//   } else {
+//     handleError("geoLocationUnavailable");
+//   }
+// };
 
 const CurrentLocation = (props) => {
   const {
@@ -75,6 +80,7 @@ const CurrentLocation = (props) => {
     onError = () => {},
     children = () => null,
   } = props;
+  const { getLocation } = useMapContext();
 
   const [loading, setLoading] = useState(false);
 

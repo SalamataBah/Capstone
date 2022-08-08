@@ -33,7 +33,7 @@ export default function SearchPage() {
       <div className="search">
         <DebounceInput
           className="search"
-          debounceTimeout={500}
+          debounceTimeout={100}
           onChange={searching}
         />
       </div>

@@ -1,16 +1,17 @@
 import React from "react";
-import ReactDOM  from "react-dom/client";
+import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
+import { MapContextProvider } from "./contexts/MapContext";
 import App from "./components/App/App";
-import "./index.css"
+import "./index.css";
 
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <MapContextProvider>
+        <App />
+      </MapContextProvider>
     </BrowserRouter>
   </React.StrictMode>
-
 );
