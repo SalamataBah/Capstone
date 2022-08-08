@@ -3,25 +3,26 @@ import Faq from "react-faq-component";
 import "./FAQs.css";
 
 const data = {
-  title: "FAQs about Mentor Match",
+  title: "FAQs about Meet and Match",
   rows: [
     {
-      title: "Lorem ipsum dolor sit amet,",
-      content: "Lorem ipsum dolor sit amet, consectetur ",
-    },
-    {
-      title: "Nunc maximus, magna at ultricies elementum",
+      title: "What is Meet and Match?",
       content:
-        "Nunc maximus, magna at ultricies elementum, risus turpis vulputate quam.",
+        "Website for you to find a mentor or mentee that has interests that align with yours",
     },
     {
-      title: "Curabitur laoreet, mauris vel blandit fringilla",
+      title: "How does the Algorithm work?",
       content:
-        "Curabitur laoreet, mauris vel blandit fringilla, leo elit rhoncus nunc",
+        "The algorithm stores your information and using the premise of graph theory it analyses your information and find someone who is similar to you ",
     },
     {
-      title: "Curabitur laoreet, mauris vel blandit fringilln",
-      content: "Curabitur laoreet, mauris vel blandit fringilla,",
+      title: "What is your story?",
+      content:
+        "The app is built to connect those who have similar academic/professional goals",
+    },
+    {
+      title: "Can I meet with my mentor/mentee in-person?",
+      content: "the rules are between you and your mentee/mentor",
     },
   ],
 };

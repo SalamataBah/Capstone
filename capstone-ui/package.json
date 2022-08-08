@@ -10,6 +10,8 @@
     "antd": "^4.21.6",
     "axios": "^0.27.2",
     "bulma": "^0.9.4",
+    "Companies": "/Users/salamatabah/Desktop/capstone-project/capstone-backend/data/companies.json",
+    "js-cookie": "^3.0.1",
     "jsx": "^0.9.89",
     "multiselect-react-dropdown": "^2.0.25",
     "parse": "^3.4.3",
@@ -23,8 +25,7 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "react-select": "^5.4.0",
-    "semantic-ui-react": "^2.1.3",
-    "Companies" : "/Users/salamatabah/Desktop/capstone-project/capstone-backend/data/companies.json"
+    "semantic-ui-react": "^2.1.3"
   },
   "scripts": {
     "start": "react-scripts start",

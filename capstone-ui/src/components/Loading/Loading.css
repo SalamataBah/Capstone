@@ -1,6 +1,7 @@
 .loading-state {
     margin: auto;
     align-items: center;
+    position: fixed;
 
 }
 
