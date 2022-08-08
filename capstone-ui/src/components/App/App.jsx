@@ -412,6 +412,7 @@ function App() {
     <div className="App">
       <main>
         <Navbar isLoggedIn={isLoggedIn} onClickLogOut={handleLogout} />
+        {/* <Navbar isLoggedIn={isLoggedIn} onClickLogOut={handleLogout} /> */}
 
         {/* {isLoggedIn && (
           <ProfileEdit userInfo={userInfo} onClickLogOut={handleLogout} />

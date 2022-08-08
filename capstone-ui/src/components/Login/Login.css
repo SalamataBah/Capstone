@@ -6,3 +6,22 @@
     color: black;
     
 }
+
+.loginbutton{
+    width: 40%;
+    height: 40px;
+    background-color: #FB8E0B;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 6px;
+    border: none;
+}
+.loginbutton:hover{
+    width: 40%;
+    height: 40px;
+    font-size: 20px;
+    color: var(--color-text);
+    font-weight: bold;
+    border: none;
+    opacity: 0.9;
+}

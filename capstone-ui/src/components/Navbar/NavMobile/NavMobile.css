@@ -1,0 +1,30 @@
+
+.shortLinksMob{
+    color: var(--color-text);
+}
+.shortLinksMob:hover{
+    color: #FB8E0B;
+    text-decoration: underline;
+    
+}
+.navbarMob-login{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+  }
+.twoBtnMob{
+display: flex;
+flex-direction: column;
+}
+.buttonMob {
+    cursor: pointer;
+    color: #fff;
+    background:  #FB8E0B;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 25px;
+    outline: none;
+    border-radius: 9px;
+    margin-top: 15px;
+  }

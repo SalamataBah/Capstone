@@ -1,40 +1,18 @@
 import React from "react";
 import "./Navbar.css";
-import Logo from "../Logo/Logo";
+import Logo from "/Users/salamatabah/Desktop/capstone-project/capstone-ui/src/components/Logo/Logo.jsx";
 import { Link } from "react-router-dom";
+import NavDesktop from "/Users/salamatabah/Desktop/capstone-project/capstone-ui/src/components/Navbar/NavDesktop/NavDesktop.jsx";
+import NavMob from "/Users/salamatabah/Desktop/capstone-project/capstone-ui/src/components/Navbar/NavMobile/NavMobile.jsx";
 
 function Navbar({ isLoggedIn, onClickLogOut }) {
   return (
-    <div className="navbar">
-      <div className="navbar-links">
-        <div className="navbar-logo">
-          <Logo />
-        </div>
-        <div className="navbar-container">
-          <Link to="/home">Home</Link>
-          <Link to="/about">About</Link>
-          <Link to="/faqs">FAQs</Link>
-          <Link to="/successStories">Success Stories</Link>
-          <Link to="/contact">Contact</Link>
-        </div>
-        <div className="navbar-login">
-          <Link className="button" to="/register">
-            Sign Up
-          </Link>
-          <Link className="button" to="/login">
-            Log In
-          </Link>
-          {isLoggedIn && (
-            <Link
-              className="button"
-              target="_blank"
-              to="/logout"
-              onClick={onClickLogOut}
-            >
-              Log Out
-            </Link>
-          )}
-        </div>
+    <div>
+      <div className="d-lg-block d-none">
+        <NavDesktop isLoggedIn={isLoggedIn} onClickLogOut={onClickLogOut} />
+      </div>
+      <div className="d-lg-none">
+        <NavMob isLoggedIn={isLoggedIn} onClickLogOut={onClickLogOut} />
       </div>
     </div>
   );
