@@ -44,6 +44,32 @@ app.get("/allUsers", async (req, res) => {
   }
 });
 
+app.get("/allUsersCoords", async (req, res) => {
+  try {
+    const query = new Parse.Query("User");
+    const entries = await query.find();
+    let allUsersInterests = [];
+    let interestsInfo = [];
+    let usersInfo = [];
+    for (let i = 0; i < entries.length; i++) {
+      const userInfo = entries[i];
+      const interests = await getUserData(userInfo);
+      interestsInfo.push(interests);
+      usersInfo.push(userInfo);
+      allUsersInterests.push({
+        userInfo: userInfo,
+        interests: interests,
+      });
+    }
+    res.send({
+      message: "table retrieved",
+      allUsersInterests: allUsersInterests,
+      typeStatus: "success",
+    });
+  } catch (err) {
+    res.send({ message: "Error retrieving users", typeStatus: "danger" });
+  }
+});
 function checkUserInterests(searchVal, interestInfo, usersInfo) {
   const userInfoJson = usersInfo.toJSON();
   for (let skill of interestInfo.skills) {
