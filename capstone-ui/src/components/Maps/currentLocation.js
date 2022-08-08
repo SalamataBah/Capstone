@@ -59,20 +59,6 @@ const getGeoLocationError = (error, handleError) => {
   }
 };
 
-// const getLocation = (onFetchAddress, handleError) => {
-//   if (navigator.geolocation) {
-//     navigator.geolocation.getCurrentPosition(
-//       (position) => {
-//         console.log("latitude", position.coords.latitude);
-//         console.log("latitude", position.coords.longitude);
-//         getResults(position, onFetchAddress, handleError);
-//       },
-//       (error) => getGeoLocationError(error, handleError)
-//     );
-//   } else {
-//     handleError("geoLocationUnavailable");
-//   }
-// };
 
 const CurrentLocation = (props) => {
   const {

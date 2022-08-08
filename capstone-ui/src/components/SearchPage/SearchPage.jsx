@@ -1,7 +1,5 @@
 import React from "react";
 import "./SearchPage.css";
-import MentorCard from "./MentorCard/MentorCard";
-import Menu from "./Menu/Menu";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import * as config from "../../config";
@@ -16,9 +14,6 @@ export default function SearchPage() {
   const searching = (e) => {
     setSearchVal(e.target.value);
   };
-
-  const URL = `${config.API_BASE_URL}/allUsers/${searchVal}`;
-  console.log("URL: ", URL);
 
   useEffect(() => {
     axios.get(`${config.API_BASE_URL}/allUsers/${searchVal}`).then((result) => {

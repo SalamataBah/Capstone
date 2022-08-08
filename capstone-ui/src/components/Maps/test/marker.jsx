@@ -4,13 +4,11 @@ import { useMapContext } from "/Users/salamatabah/Desktop/capstone-project/capst
 import axios from "axios";
 import * as config from "../../../config";
 
-// this code is  not cleaned up but it displays the map, and the only thing left to do is to display the markers
-
 export default function Maps(userInfo) {
   const [allUserCoords, setAllUserCoords] = useState({});
 
   useEffect(() => {
-    axios.get(`${config.API_BASE_URL}/allUsers/`).then((result) => {
+    axios.get(`${config.API_BASE_URL}/allUsersCoords`).then((result) => {
       setAllUserCoords(result.data.allUsersInterests);
     });
   }, [allUserCoords]);
@@ -41,6 +39,7 @@ export default function Maps(userInfo) {
   let demoLocations = [
     // { lat: userLat, lng: userLong },
     // from array results (harcoded, needs to be done)
+    { lat: 37.4853352, lng: -122.1771682 },
     { lat: 37.3859285, lng: -121.9964962 },
     { lat: 37.3859316, lng: -121.9965076 },
     { lat: 37.3859243, lng: -121.9965082 },
