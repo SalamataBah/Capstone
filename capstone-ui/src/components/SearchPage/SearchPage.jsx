@@ -5,83 +5,93 @@ import Menu from "./Menu/Menu";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import * as config from "../../config";
+import { DebounceInput } from "react-debounce-input";
 
 export default function SearchPage() {
   const [mentors, setMentors] = useState([]);
   console.log("mentors: ", mentors);
-  const [searchInput, setSearchInput] = useState("");
-  console.log("searchInput: ", searchInput);
+  const [searchVal, setSearchVal] = useState("");
+  console.log("searchVal: ", searchVal);
 
-  const [filteredResults, setFilteredResults] = useState([]);
+  const searching = (e) => {
+    setSearchVal(e.target.value);
+  };
+
+  const URL = `${config.API_BASE_URL}/allUsers/${searchVal}`;
+  console.log("URL: ", URL);
 
   useEffect(() => {
-    axios.get(`${config.API_BASE_URL}/matches`).then((response) => {
-      console.log("response: ", response);
-      setMentors(response.data);
+    axios.get(`${config.API_BASE_URL}/allUsers/${searchVal}`).then((result) => {
+      console.log("result: ", result.data.allUsersInterests);
+      setMentors(result.data.allUsersInterests);
     });
-  }, []);
-
-  const handleSearch = (searchValue) => {
-    setSearchInput(searchValue);
-    if (searchInput != "") {
-      const filteredData = mentors.data.filter((mentor) => {
-        console.log("filteredData: ", filteredData);
-        return Object.values(mentor)
-          .join("")
-          .toLowerCase()
-          .includes(searchInput.toLocaleLowerCase());
-      });
-      setFilteredResults(filteredData);
-    } else {
-      setFilteredResults(mentors);
-    }
-  };
-  // const content =
-  //   searchInput.length > 1
-  //     ? filteredResults?.map((mentor) => {
-  //         return (
-  //           <div className="mentor-grid">
-  //             <button className="country-location">
-  //               {mentor.usersInfo.user_1}
-  //             </button>
-  //             {/* <a className="avatar" href={mentor.avatar}></a> */}
-  //             {/* <button className="like-button">Add to Favorite</button>
-  //             <h2 className="name">{mentor.usersInfo}</h2>
-  //             <h4 className="role">{mentor.title}</h4>
-  //             {/* <p className="bio">{mentor.description}</p>
-  //             <button className="tags">{mentor.tags}</button> */}
-  //             <button>Get Connected</button>
-  //           </div>
-  //         );
-  //       })
-  //     : mentors?.data?.map((mentor) => {
-  //         return (
-  //           <div className="mentor-grid">
-  //             <button className="country-location">
-  //               {mentor.usersInfo.user_1}
-  //             </button>
-  //             {/* <a className="avatar" href={mentor.avatar}></a>
-  //             <button className="like-button">Add to Favorite</button>
-  //             <h2 className="name">{mentor.name}</h2>
-  //             <h4 className="role">{mentor.title}</h4>
-  //             {/* <p className="bio">{mentor.description}</p>
-  //             <button className="tags">{mentor.tags}</button> */}
-  //             <button>Get Connected</button>
-  //           </div>
-  //         );
-  //       });
+  }, [searchVal]);
 
   return (
     <div className="search-bar">
       <h1>Find a Mentor</h1>
       <div className="search">
-        <input
-          placeholder="Search for a mentor"
-          onChange={(e) => handleSearch(e.target.value)}
-          value={searchInput}
+        <DebounceInput
+          className="search"
+          debounceTimeout={100}
+          onChange={searching}
         />
       </div>
-      {/* {content} */}
+      <div className="card">
+        {mentors.map((mentor, ix) => (
+          <div key={ix} className="card">
+            <p className="card-text">Username: {mentor.userInfo.username} </p>
+            <p className="card-text">Location: {mentor.userInfo.location} </p>
+            <p className="card-text">Bio: {mentor.userInfo.bio} </p>
+            <p className="card-text">Major: {mentor.userInfo.major} </p>
+            <p className="card-text">Skills: {mentor.userInfo.skills} </p>
+            {Array.isArray(mentor.interests.skills) &&
+            mentor.interests.skills.length > 0 ? (
+              <div>
+                <p className="card-text match-interests"> </p>
+                {mentor.interests.skills.map((skill, key) => (
+                  <p
+                    key={key}
+                    className="card-text match-interests match-skills"
+                  >
+                    {skill.name} {""}
+                  </p>
+                ))}
+              </div>
+            ) : null}
+            <p className="card-text">Companies: {mentor.userInfo.companies} </p>
+            {Array.isArray(mentor.interests.companies) &&
+            mentor.interests.companies.length > 0 ? (
+              <div>
+                <p className="card-text match-interests"> </p>
+                {mentor.interests.companies.map((skill, key) => (
+                  <p
+                    key={key}
+                    className="card-text match-interests match-skills"
+                  >
+                    {skill.name} {""}
+                  </p>
+                ))}
+              </div>
+            ) : null}
+            <p className="card-text">Languages: {mentor.userInfo.languages} </p>
+            {Array.isArray(mentor.interests.languages) &&
+            mentor.interests.languages.length > 0 ? (
+              <div>
+                <p className="card-text match-interests"> </p>
+                {mentor.interests.languages.map((skill, key) => (
+                  <p
+                    key={key}
+                    className="card-text match-interests match-skills"
+                  >
+                    {skill.name} {""}
+                  </p>
+                ))}
+              </div>
+            ) : null}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

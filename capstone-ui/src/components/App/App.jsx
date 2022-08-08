@@ -19,9 +19,14 @@ import ProfileEdit from "../Profile/ProfileEdit/ProfileEdit";
 import Interests from "../Profile/Interests/Interests";
 import InterestEdit from "../Profile/InterestEdit/InterestEdit";
 import Match from "../Match/Match";
+import SearchPage from "../SearchPage/SearchPage";
+import CurrentLocation from "../Maps/currentLocation";
+import Maps from "../Maps/test/marker";
+import { useMapContext } from "../../contexts/MapContext";
 
 function App() {
   const navigate = useNavigate();
+  const { getLocation } = useMapContext();
   const [isLoggedIn, setIsLoggedIn] = useState(
     localStorage.getItem("userInfo") != null
   );
@@ -34,8 +39,14 @@ function App() {
   const [selectedSkill, setSelectedSkill] = useState(null);
 
   const [company, setCompany] = useState("");
-  console.log("company: ", company);
   const [language, setLanguage] = useState("");
+
+  const handleResults = (results) => {
+    console.log("My location: ", results);
+    <div className="card">{results[0].formatted_address} </div>;
+  };
+
+  const onError = (type, status) => console.log(type, status);
 
   function getCompany() {
     const companyValue = document.getElementById("add-company");
@@ -43,55 +54,70 @@ function App() {
     setCompany(companyInput);
   }
 
-  async function getLanguage() {
-    const queryInput = document.getElementById("add-language");
-    const queryValue = queryInput?.value || "";
-    const options = {
-      method: "GET",
-      headers: {
-        "X-RapidAPI-Key": "e1dc640022mshb32006c77e1acb7p1c1665jsnbea1abbff153",
-        "X-RapidAPI-Host": "world-countries.p.rapidapi.com",
-      },
-    };
-
-    const res = await fetch(
-      "https://world-countries.p.rapidapi.com/dz",
-      options
-    )
-      .then((response) => response.json())
-      .catch((err) => console.error(err));
-    console.log("res: ", res);
+  function removeCompany(company) {
+    setIsLoading(true);
+    axios
+      .post(`${config.API_BASE_URL}/profile/interests/remove`, {
+        companies: company,
+      })
+      .then(function () {
+        getInterests();
+        setIsLoading(false);
+      })
+      .catch(function (error) {
+        console.log("error: ", error);
+      });
   }
-  getLanguage();
+
+  function getLanguage() {
+    const langValue = document.getElementById("add-language");
+    const langInput = langValue?.value || "";
+    setLanguage(langInput);
+  }
+
+  function removeLanguage(language) {
+    setIsLoading(true);
+    axios
+      .post(`${config.API_BASE_URL}/profile/interests/remove`, {
+        language: language,
+      })
+      .then(function () {
+        getInterests();
+        setIsLoading(false);
+      })
+      .catch(function (error) {
+        console.log("error: ", error);
+      });
+  }
 
   const [matches, setMatches] = useState([]);
   const [offset, setOffset] = useState(0);
   const matchLimit = 2;
   const [fetchMatch, setFetchMatch] = useState(false);
 
-  // useEffect(() => {
-  //   if (window.localStorage.getItem("userInfo") && userInfo.interests) {
-  //     if (matches.length === 0 && !fetchMatch) {
-  //       createMatch({});
-  //     }
-  //     getMatches(matchLimit + offset, 0);
-  //   }
-  // }, [userInfo]);
+  useEffect(() => {
+    if (window.localStorage.getItem("userInfo") && userInfo?.interests) {
+      if (matches.length === 0 && !fetchMatch) {
+        createMatch({});
+      }
+      getMatches(matchLimit + offset, 0);
+    }
+  }, [userInfo]);
 
-  // useEffect(() => {
-  //   setIsLoading(true);
-  //   if (window.performance) {
-  //     if (
-  //       window.localStorage.getItem("userInfo") &&
-  //       !userInfo &&
-  //       String(window.performance.getEntriesByType("navigation")[0].type) ===
-  //         "reload"
-  //     ) {
-  //       refreshPage();
-  //     }
-  //   }
-  //   setIsLoading(false);
-  // }, []);
+  useEffect(() => {
+    setIsLoading(true);
+    if (window.performance) {
+      if (
+        window.localStorage.getItem("userInfo") &&
+        !userInfo &&
+        String(window.performance.getEntriesByType("navigation")[0].type) ===
+          "reload"
+      ) {
+        refreshPage();
+      }
+    }
+    setIsLoading(false);
+  }, []);
 
   const goToMatch = () => {
     if (matches.length === 0) {
@@ -99,6 +125,10 @@ function App() {
       createMatch({});
     }
     navigate("/profile/match");
+  };
+
+  const goToSearch = () => {
+    navigate("/profile/search");
   };
 
   async function getMatches(limit, offset) {
@@ -179,6 +209,7 @@ function App() {
           alert("Error with logging in !");
           navigate("/login");
         } else {
+          getLocation();
           setUserInfo(response.data.userInfo);
           console.log("response: ", response);
           window.localStorage.setItem(
@@ -219,7 +250,6 @@ function App() {
           username: document.getElementById("username").value,
         })
         .then(function (response) {
-          console.log("response: ", response);
           if (response.data.typeStatus === "success") {
             navigate("/login");
           }
@@ -281,7 +311,6 @@ function App() {
     await axios
       .get(`${config.API_BASE_URL}/profile/interests`)
       .then((response) => {
-        console.log("response: ", response);
         if (userInfo) {
           setSkillsJson(response.data.skillsJson);
           setCompany(response.data.company);
@@ -375,6 +404,10 @@ function App() {
   const goToEditInfo = () => {
     navigate("/profile/edit");
   };
+
+  const goToMap = () => {
+    navigate("/location");
+  };
   return (
     <div className="App">
       <main>
@@ -382,7 +415,7 @@ function App() {
         {/* <Navbar isLoggedIn={isLoggedIn} onClickLogOut={handleLogout} /> */}
 
         {/* {isLoggedIn && (
-          <ProfileCard userInfo={userInfo} onClickLogOut={handleLogout} />
+          <ProfileEdit userInfo={userInfo} onClickLogOut={handleLogout} />
         )} */}
         <Routes>
           <Route path="/" element={<Home />} />
@@ -441,6 +474,8 @@ function App() {
                 goToEditInfo={goToEditInfo}
                 setUserInfo={setUserInfo}
                 onClickMatch={goToMatch}
+                onClickSearch={goToSearch}
+                onClickMap={goToMap}
               />
             }
           />
@@ -477,12 +512,14 @@ function App() {
                 skillsJson={skillsJson}
                 company={company}
                 getCompany={getCompany}
+                removeCompany={removeCompany}
                 addSkill={addSkill}
                 removeSkill={removeSkill}
                 selectedSkill={selectedSkill}
                 setSelectedSkill={setSelectedSkill}
                 language={language}
                 getLanguage={getLanguage}
+                removeLanguage={removeLanguage}
               />
             }
           />
@@ -500,6 +537,29 @@ function App() {
                 goToMatch={goToMatch}
                 createMatch={createMatch}
               />
+            }
+          />
+          <Route path="/profile/search" element={<SearchPage />} />
+          <Route
+            path="/location"
+            element={
+              <div>
+                <CurrentLocation
+                  onFetchAddress={handleResults}
+                  onError={onError}
+                >
+                  {({ getCurrentLocation, loading }) => (
+                    <button
+                      className="button"
+                      onClick={getCurrentLocation}
+                      disabled={loading}
+                    >
+                      Share my Location
+                    </button>
+                  )}
+                </CurrentLocation>
+                <Maps userInfo={userInfo} />
+              </div>
             }
           />
         </Routes>

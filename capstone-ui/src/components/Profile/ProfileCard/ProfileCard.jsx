@@ -9,6 +9,11 @@ const ProfileCard = ({
   setUserInfo,
   saveInfo,
 }) => {
+  const removeRole = (key) => {
+    var temp = userInfo.roles;
+    temp.splice(key, 1);
+    setUserInfo({ ...userInfo, roles: temp });
+  };
   return isLoading ? (
     <Loading></Loading>
   ) : (
@@ -59,20 +64,18 @@ const ProfileCard = ({
           <br />
           {userInfo.roles && userInfo.roles.length != 0
             ? userInfo.roles.map((role, key) => (
-                <div key={key} className="role-state">
-                  <p className="role-input">{role}</p>
+                <div key={key} className="tag-item">
+                  <p className="tag-text">{role}</p>
                   <p
-                    className="change-role"
+                    className="remove-tag"
                     onClick={() => {
-                      let temp = userInfo.roles;
-                      temp.splice(key, 1);
-                      setUserInfo({
-                        ...userInfo,
-                        roles: temp,
-                      });
+                      var newTags = userInfo.roles;
+                      newTags.splice(key, 1);
+                      setUserInfo({ ...userInfo, roles: newTags });
                     }}
                   >
-                    X
+                    {" "}
+                    x
                   </p>
                 </div>
               ))

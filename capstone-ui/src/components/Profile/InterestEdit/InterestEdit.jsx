@@ -75,7 +75,7 @@ export default function InterestEdit({
                   <p
                     className="skills-name remove-skills"
                     onClick={() => {
-                      removeCompany(getCompany);
+                      removeCompany(company);
                     }}
                   >
                     X

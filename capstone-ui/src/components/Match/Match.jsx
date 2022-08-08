@@ -22,16 +22,42 @@ export default function Match({
     <div className="match" id="match">
       {matches.map((match, index) => (
         <div key={index} className="card">
-          <p className="card-text">{match.userInfo.username}</p>
-          <p className="card-text">{match.userInfo.location}</p>
-          <p className="card-text">{match.userInfo.skills}</p>
+          <p className="card-text">Username: {match.userInfo.username}</p>
+          <p className="card-text">Location: {match.userInfo.location}</p>
+          <p className="card-text">Bio: {match.userInfo.bio}</p>
+          <p className="card-text">Major: {match.userInfo.major}</p>
+          <p className="card-text">Skills: {match.userInfo.skills}</p>
           {Array.isArray(match.interestsInfo.skills) &&
           match.interestsInfo.skills.length > 0 ? (
             <div>
-              <p className="card-text match-interests">Skills:</p>
+              <p className="card-text match-interests"> </p>
               {match.interestsInfo.skills.map((skill, key) => (
                 <p key={key} className="card-text match-interests match-skills">
-                  {skill.name}
+                  {skill.name} {""}
+                </p>
+              ))}
+            </div>
+          ) : null}{" "}
+          <p className="card-text">Companies: {match.userInfo.companies}</p>
+          {Array.isArray(match.interestsInfo?.companies) &&
+          match.interestsInfo.companies?.length > 0 ? (
+            <div>
+              <p className="card-text match-interests"> </p>
+              {match.interestsInfo.companies?.map((company, key) => (
+                <p key={key} className="card-text match-interests match-skills">
+                  {company.name} {""}
+                </p>
+              ))}
+            </div>
+          ) : null}{" "}
+          <p className="card-text">Languages: {match.userInfo.languages}</p>
+          {Array.isArray(match.interestsInfo?.languages) &&
+          match.interestsInfo.languages?.length > 0 ? (
+            <div>
+              <p className="card-text match-interests"> </p>
+              {match.interestsInfo.languages?.map((language, key) => (
+                <p key={key} className="card-text match-interests match-skills">
+                  {language.name} {""}
                 </p>
               ))}
             </div>
@@ -66,7 +92,7 @@ export default function Match({
         <button
           className="button"
           onClick={() => {
-            const newOffset = parseInt(offset) + parseInt(matchLimit);
+            const newOffset = Number(offset) + Number(matchLimit);
             getMatches(matchLimit, newOffset);
             setOffset(newOffset);
           }}

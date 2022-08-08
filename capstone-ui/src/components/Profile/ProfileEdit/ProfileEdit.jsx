@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./ProfileEdit.css";
 import Loading from "../../Loading/Loading";
 import SearchPage from "../../SearchPage/SearchPage";
+import { useMapContext } from "../../../contexts/MapContext.jsx";
+import axios from "axios";
+import * as config from "../../../config";
 
 export default function ProfileEdit({
   userInfo,
@@ -9,7 +12,23 @@ export default function ProfileEdit({
   goToEditInfo,
   isLoading,
   onClickMatch,
+  onClickSearch,
+  onClickMap,
 }) {
+  const { lat, lng } = useMapContext();
+
+  useEffect(() => {
+    const getUserCoords = async () => {
+      console.log("In profile edit");
+      await axios.post(`${config.API_BASE_URL}/userCoords`, {
+        lat: lat,
+        lng: lng,
+      });
+    };
+
+    getUserCoords();
+  }, [lat, lng]);
+
   return isLoading ? (
     <Loading></Loading>
   ) : (
@@ -42,14 +61,19 @@ export default function ProfileEdit({
           </div>
 
           <button className="button" onClick={goToEditInfo}>
-            Edit
+            Edit Profile
           </button>
         </div>
       </div>
       <button className="button" onClick={onClickMatch}>
         Find Your Match{" "}
       </button>
-      <SearchPage />
+      <button className="button" onClick={onClickSearch}>
+        Search For a match{" "}
+      </button>
+      <button className="button" onClick={onClickMap}>
+        Find a Match on a Map{" "}
+      </button>
     </div>
   );
 }
