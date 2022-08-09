@@ -10,7 +10,7 @@ export function MapContextProvider({ children }) {
   const [lat, setLat] = useState("");
   const [lng, setLng] = useState("");
   const [status, setStatus] = useState("");
-  const [test, setTest] = useState("This place is boring!!!");
+  const [test, setTest] = useState("testtt");
 
   const getLocation = () => {
     if (!navigator.geolocation) {
