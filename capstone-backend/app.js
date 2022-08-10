@@ -13,11 +13,11 @@ app.use(morgan("tiny"));
 app.use(cors());
 app.use(bodyParser.json());
 
-// app.get("/", (req, res) => {
-//   res.send("It works!");
-// });
+app.get("/", (req, res) => {
+  res.send("It works!");
+});
 app.use("/", auth);
-app.use("/user", user);
+app.use("/profile", user);
 app.use("/matches", matching);
 
 

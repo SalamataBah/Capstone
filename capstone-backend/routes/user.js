@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Parse = require("parse/node");
 const fs = require("fs");
-const {sortUsersCoords} = require('./utils/sortedDistance')
+const {sortUsersCoords} = require('../utils/sortedDistance')
 
 
 async function removeInterest(objectName, itemKey, itemValue, currentUser) {
@@ -390,17 +390,6 @@ router.get("/allLanguages", async (req, res) => {
       });
     }
   });
-  
-function handleErrorParse(error) {
-    if (error?.code) {
-      switch (error.code) {
-        case parent.Error.INVALID_SESSION_TOKEN:
-          Parse.User.logOut();
-          res.redirect("/login");
-          break;
-      }
-    }
-  }
   
 router.post("/userCoords", async (req, res) => {
     Parse.User.enableUnsafeCurrentUser();

@@ -1,8 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const Parse = require("parse/node");
+const {sortUsersCoords} = require('../utils/sortedDistance')
 
-router.post("/matches", async (req, res) => {
+let sortedProximity = []
+router.post("/allUsersCoords", async(req, res,) => {  
+    sortedProximity = sortUsersCoords(req.body.obj, req.body.currentUserLat, req.body.currentUserLng)  
+  })
+
+router.post("/", async (req, res) => {
     Parse.User.enableUnsafeCurrentUser();
     const params = req.body.params;
     const currentUser = Parse.User.current();
@@ -23,7 +29,7 @@ router.post("/matches", async (req, res) => {
     }
   });
   
-router.get("/matches", async (req, res) => {
+router.get("/", async (req, res) => {
     Parse.User.enableUnsafeCurrentUser();
     const currentUser = Parse.User.current();
     const limit = req.query["limit"];
@@ -171,19 +177,6 @@ function calculateArrayScore(array1, array2, weight) {
   const industryNameWeight = 0.12;
   const positionNameWeight = 0.12;
   
-  const compareStrings = (str1, str2, weight) => {
-    if (!str1 || !str2) {
-      return 0;
-    } else {
-      str1 = str1.toLowerCase();
-      str2 = str2.toLowerCase();
-      if (!str1.includes(str2) || !str2.includes(str1)) {
-        return weight;
-      } else {
-        return 0;
-      }
-    }
-  };
   
 function getScore(skills, roles, sortedProximity,companies,languages) {
   
@@ -363,4 +356,5 @@ async function getUserData(user) {
       sortedProximity: sortedProximity,
     };
   }
+  
 module.exports = router;
