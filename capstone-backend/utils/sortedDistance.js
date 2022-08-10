@@ -5,7 +5,7 @@ function swap(arr, i, j) {
     arr[i] = arr[j];
     arr[j] = temp;
   }
-  function distance(lat1, lon1, lat2, lon2) {
+function distance(lat1, lon1, lat2, lon2) {
     lon1 = (lon1 * Math.PI) / 180;
     lon2 = (lon2 * Math.PI) / 180;
     lat1 = (lat1 * Math.PI) / 180;
@@ -21,7 +21,7 @@ function swap(arr, i, j) {
     return c * r;
   }
   
-  function partition(arr, low, high, userPositionLat, userPositionLong) {
+function partition(arr, low, high, userPositionLat, userPositionLong) {
     let userLocationLat = arr[high].lat;
     let userLocationLong = arr[high].lng;
     let pivot = distance(
@@ -49,7 +49,7 @@ function swap(arr, i, j) {
     return i + 1;
   }
   
-  function quickSort(arr, low, high, userPositionLat, userPositionLong) {
+function quickSort(arr, low, high, userPositionLat, userPositionLong) {
     if (low < high) {
       let pi = partition(arr, low, high, userPositionLat, userPositionLong);
       quickSort(arr, low, pi - 1, userPositionLat, userPositionLong);
@@ -57,12 +57,12 @@ function swap(arr, i, j) {
     }
   }
   
-  function sortUsersCoords(usersCoords, userPositionLat, userPositionLong) {
+function sortUsersCoords(usersCoords, userPositionLat, userPositionLong) {
     quickSort(usersCoords, 0, usersCoords.length - 1, userPositionLat, userPositionLong);
    
     allSortedDistances = usersCoords    
     return usersCoords;
   }
 
-  module.exports ={sortUsersCoords, allSortedDistances} 
+module.exports ={sortUsersCoords, allSortedDistances} 
   
