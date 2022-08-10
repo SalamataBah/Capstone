@@ -1,6 +1,5 @@
 import React from "react";
 import Logo from "/Users/salamatabah/Desktop/capstone-project/capstone-ui/src/components/Logo/Logo.jsx";
-import Cookies from "js-cookie";
 import "./NavMobile.css";
 import { Container, Nav, Navbar, Offcanvas } from "react-bootstrap";
 

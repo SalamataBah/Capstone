@@ -1,6 +1,5 @@
 import React from "react";
 import "./SuccessStories.css";
-import { Button, Container, Row, Col } from "react-bootstrap";
 import girl1 from "../../images/girl1.PNG";
 
 export default function SuccesStories() {

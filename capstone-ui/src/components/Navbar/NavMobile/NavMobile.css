@@ -19,7 +19,7 @@ flex-direction: column;
 }
 .buttonMob {
     cursor: pointer;
-    color: #fff;
+    color: var(--color-text);
     background:  #FB8E0B;
     font-weight: 500;
     font-size: 18px;

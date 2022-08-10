@@ -5,6 +5,8 @@ const Parse = require("parse/node");
 const { PARSE_APP_ID, PARSE_JAVASCRIPT_KEY } = require("./config");
 const app = express();
 const fs = require("fs");
+const {sortUsersCoords} = require('./utils/sortedDistance')
+const allSortedDistances = require('./utils/sortedDistance')
 
 app.use(express.json());
 app.use(morgan("tiny"));
@@ -43,6 +45,38 @@ app.get("/allUsers", async (req, res) => {
     res.send({ message: "Error retrieving users", typeStatus: "danger" });
   }
 });
+
+app.get("/allUsersCoords", async (req, res) => {
+  try {
+    const query = new Parse.Query("User");
+    const entries = await query.find();
+    let allUsersInterests = [];
+    let interestsInfo = [];
+    let usersInfo = [];
+    for (let i = 0; i < entries.length; i++) {
+      const userInfo = entries[i];
+      const interests = await getUserData(userInfo);
+      interestsInfo.push(interests);
+      usersInfo.push(userInfo);
+      allUsersInterests.push({
+        userInfo: userInfo,
+        interests: interests,
+      });
+    }
+    res.send({
+      message: "table retrieved",
+      allUsersInterests: allUsersInterests,
+      typeStatus: "success",
+    });
+  } catch (err) {
+    res.send({ message: "Error retrieving users", typeStatus: "danger" });
+  }
+});
+
+let sortedProximity = []
+app.post("/allUsersCoords", async(req, res,) => {  
+  sortedProximity = sortUsersCoords(req.body.obj, req.body.currentUserLat, req.body.currentUserLng)  
+})
 
 function checkUserInterests(searchVal, interestInfo, usersInfo) {
   const userInfoJson = usersInfo.toJSON();
@@ -166,14 +200,11 @@ function handleErrorParse(error) {
 app.post("/userCoords", async (req, res) => {
   Parse.User.enableUnsafeCurrentUser();
   const infoUser = req.body;
-  console.log("infoUser in backend: ", infoUser);
   const lat = infoUser?.lat;
   const lng = infoUser?.lng;
 
   const CoordObject = Parse.Object.extend("User");
   const coords = new CoordObject();
-  // const points = new Parse.GeoPoint(20, -20);
-  // console.log("point: ", points);
 
   const currentUser = Parse.User.current();
   try {
@@ -731,6 +762,7 @@ async function getUserData(user) {
     companies: userCompanies,
     languages: userLanguages,
     roles: user.get("roles"),
+    sortedProximity: sortedProximity,
   };
 }
 

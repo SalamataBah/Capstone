@@ -2,12 +2,8 @@ import React from "react";
 import "./NavDeskTop.css";
 import Logo from "/Users/salamatabah/Desktop/capstone-project/capstone-ui/src/components/Logo/Logo.jsx";
 import { Link } from "react-router-dom";
-import Cookies from "js-cookie";
 
 function NavDesktop({ isLoggedIn, onClickLogOut }) {
-  const onClick = (event) => {
-    Cookies.remove("accessToken");
-  };
   return (
     <div className="navbar">
       <div className="navbar-links">
