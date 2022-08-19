@@ -1,19 +1,29 @@
-import React from "react";
-import "./Match.css";
+import * as React from "react";
+import "./FavoriteMatch.css";
 import Loading from "../Loading/Loading";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
+import { FaRegHeart } from "react-icons/fa";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from "react-responsive-carousel";
+import { useState } from "react";
 
-export default function Match({
+export default function FavoriteMatch({
   isLoading,
-  setIsLoading,
   matches,
   getMatches,
-  matchLimit,
-  offset,
-  setOffset,
   createMatch,
-  goToMatch,
+  goToLiked,
+  setIsLoading,
 }) {
+  const [numLikes, setNumLiked] = useState(0);
+  const countLikes = () => {
+    const numLiked = document.getElementsByClassName("card");
+    setNumLiked(numLiked);
+  };
+  React.useEffect(() => {
+    countLikes();
+  }, []);
+
   return isLoading || !matches || !Array.isArray(matches) ? (
     <Loading></Loading>
   ) : matches.length == 0 ? (
@@ -79,7 +89,7 @@ export default function Match({
                   liked: !liked,
                 });
                 await getMatches(10, 0);
-                await goToMatch();
+                await goToLiked();
                 setIsLoading(false);
               }}
             >
@@ -89,19 +99,7 @@ export default function Match({
           }
         </div>
       ))}
-      {matches.length < matchLimit ? null : (
-        <p
-          className="button"
-          onClick={() => {
-            const newOffset = Number(offset) + Number(matchLimit);
-            getMatches(matchLimit, newOffset);
-            setOffset(newOffset);
-          }}
-        >
-          {" "}
-          Other Matches{" "}
-        </p>
-      )}
+      {numLikes.length == 0 ? <h2>No Liked Matches Yet!</h2> : ""}
     </div>
   );
 }

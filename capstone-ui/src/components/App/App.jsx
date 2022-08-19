@@ -23,6 +23,7 @@ import SearchPage from "../SearchPage/SearchPage";
 import CurrentLocation from "../Maps/currentLocation";
 import Maps from "../Maps/test/marker";
 import { useMapContext } from "../../contexts/MapContext";
+import FavoriteMatch from "../FavoriteMatch/FavoriteMatch";
 
 function App() {
   const navigate = useNavigate();
@@ -205,21 +206,25 @@ function App() {
         password: password,
       })
       .then(function (response) {
-        if (response.data.typeStatus == "error") {
+        if (response.data.typeStatus == "danger") {
           alert("Error with logging in !");
           navigate("/login");
         } else {
+          window.localStorage.setItem(
+            "sessionToken",
+            response.data.sessionToken
+          );
           getLocation();
           setUserInfo(response.data.userInfo);
           console.log("response: ", response);
-          window.localStorage.setItem(
-            "userInfo",
-            JSON.stringify({
-              objectId: response.data.userInfo.objectId,
-              email: email,
-              password: password,
-            })
-          );
+          // window.localStorage.setItem(
+          //   "userInfo",
+          //   JSON.stringify({
+          //     objectId: response.data.userInfo.objectId,
+          //     email: email,
+          //     password: password,
+          //   })
+          // );
           setMatches([]);
           setSelectedSkill(null);
           setOffset(0);
@@ -231,6 +236,7 @@ function App() {
       .catch(function (error) {
         console.log(error);
         window.localStorage.clear();
+        navigate("/login");
         setIsLoading(false);
       });
   };
@@ -408,6 +414,10 @@ function App() {
   const goToMap = () => {
     navigate("/location");
   };
+  const goToLiked = () => {
+    getMatches(10, 0);
+    navigate("/favorite");
+  };
   return (
     <div className="App">
       <main>
@@ -476,6 +486,7 @@ function App() {
                 onClickMatch={goToMatch}
                 onClickSearch={goToSearch}
                 onClickMap={goToMap}
+                onClickFav={goToLiked}
               />
             }
           />
@@ -498,6 +509,19 @@ function App() {
                 isLoading={isLoading}
                 onClickProfile={goToProfile}
                 onEditInterests={goToEditInterests}
+              />
+            }
+          />
+          <Route
+            path="/favorite"
+            element={
+              <FavoriteMatch
+                isLoading={isLoading}
+                matches={matches}
+                getMatches={getMatches}
+                createMatch={createMatch}
+                goToLiked={goToLiked}
+                setIsLoading={setIsLoading}
               />
             }
           />
@@ -549,13 +573,13 @@ function App() {
                   onError={onError}
                 >
                   {({ getCurrentLocation, loading }) => (
-                    <button
+                    <p
                       className="button"
                       onClick={getCurrentLocation}
                       disabled={loading}
                     >
-                      Share my Location
-                    </button>
+                      Find Match on Map
+                    </p>
                   )}
                 </CurrentLocation>
                 <Maps userInfo={userInfo} />

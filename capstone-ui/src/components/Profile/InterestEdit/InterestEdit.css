@@ -6,13 +6,14 @@
 .selection{
     margin-left: 110px;
     margin-right: 110px;
+    color: #FB8E0B;
 }
 
 .skill-input{
     background-color: white;
-    color: black;
-    font-family: 'Poppins', sans-serif;
-    font-size: 20px;
+    width: 100%;
+    line-height: 3em;
+    box-sizing: border-box;
     border-radius: 10px;
 }
 
@@ -22,4 +23,10 @@
 
 .remove-skills{
     cursor: pointer;
+}
+.buttonTop{
+    text-align: center;
+    background-color: #FB8E0B;
+    margin-top: 60px;
+    font-family: var(--font-family);
 }

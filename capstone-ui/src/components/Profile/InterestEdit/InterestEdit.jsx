@@ -55,18 +55,15 @@ export default function InterestEdit({
     <div className="interests" id="interests">
       <div className="user-interests">
         <div className="container">
-          <img></img>
-          <h2>{userInfo.username}</h2>
+          <h2>{userInfo.username} is editing...</h2>
           <div className="user-info">
-            <p className="user-profile" onClick={onClickProfile}>
-              {" "}
-              Your Profile
+            <p className="button" onClick={onClickProfile}>
+              Go back to profile
             </p>
-            <p className="user-profile active"> Interests </p>
           </div>
         </div>
-        <div className="container">
-          <p className="skills">Companies:</p>
+        <div className="container second">
+          <p className="interests-name">Companies:</p>
           {userInfo?.interests?.companies &&
           Array.isArray(userInfo.interests.companies)
             ? userInfo.interests.companies.map((company, key) => (
@@ -86,9 +83,9 @@ export default function InterestEdit({
           <br />
           {companyClass == "hidden" ? (
             <div>
-              <button className="button" onClick={handleCompanyClass}>
+              <p className="button" onClick={handleCompanyClass}>
                 Add a company
-              </button>{" "}
+              </p>{" "}
             </div>
           ) : (
             <input
@@ -104,7 +101,7 @@ export default function InterestEdit({
               <p className="skills-name">{company.name}</p>{" "}
             </div>
           ) : null}
-          <p className="skills">Languages:</p>
+          <p className="interests-name">Languages:</p>
           {userInfo?.interests?.languages &&
           Array.isArray(userInfo.interests.languages)
             ? userInfo.interests.languages.map((language, key) => (
@@ -124,13 +121,13 @@ export default function InterestEdit({
           <br />
           {languageClass == "hidden" ? (
             <div>
-              <button className="button" onClick={handleLanguageClass}>
+              <p className="button" onClick={handleLanguageClass}>
                 Add a language
-              </button>{" "}
+              </p>{" "}
             </div>
           ) : (
             <input
-              placeholder="enter your company of interest"
+              placeholder="enter your language of interest"
               type="text"
               className={languageClass}
               id="add-language"
@@ -142,7 +139,7 @@ export default function InterestEdit({
               <p className="skills-name">{language.name}</p>{" "}
             </div>
           ) : null}
-          <p className="skills">Skills:</p>
+          <p className="interests-name">Skills:</p>
           {userInfo?.interests?.skills &&
           Array.isArray(userInfo.interests.skills)
             ? userInfo.interests.skills.map((skill, key) => (
@@ -176,9 +173,9 @@ export default function InterestEdit({
               />
             </div>
           ) : (
-            <button className="button" onClick={handleSkillClass}>
+            <p className="button" onClick={handleSkillClass}>
               Add a new skill
-            </button>
+            </p>
           )}
           {selection && skillsClass != "hidden" ? (
             <div>
@@ -213,14 +210,14 @@ export default function InterestEdit({
               )}
             </div>
           ) : null}
-          <button
-            className="button"
+          <p
+            className="buttonTop"
             onClick={() => {
               saveInterests();
             }}
           >
-            Save
-          </button>
+            Save All info
+          </p>
         </div>
       </div>
     </div>

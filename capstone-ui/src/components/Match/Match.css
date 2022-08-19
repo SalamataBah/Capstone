@@ -1,21 +1,25 @@
 .card {
-    max-height: 870px;
     background-color: var(--color-text);
     margin-left: 100px;
     margin-right: 100px;
-    margin-top: 10px;
     margin-bottom: 10px;
     margin-right: 100px;
     border-radius: 20px;
     padding: 5px;
+    width: 50%
 }
-
+.match{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    margin: auto;
+    width: 80%;
+    padding: 10px;
+}
 .card-text{
     color: black;
     text-align: center;
 }
 
-.match-interests {
-    display: inline;
-}
+
 

@@ -28,3 +28,6 @@ flex-direction: column;
     border-radius: 9px;
     margin-top: 15px;
   }
+.toggle{
+  background-color: white;
+}
