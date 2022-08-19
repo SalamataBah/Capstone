@@ -1,3 +1,37 @@
 .interests{
     color: var(--color-text);
 }
+.user-interests{
+    align-items: center;
+    justify-content: center;
+}
+.container1 {
+    color: var(--color-text);
+    width: 45%;
+    padding: 25px;
+    border: 3px solid #FB8E0B;
+    border-top-left-radius: 8%;
+    border-bottom-right-radius: 8%;
+}
+.second {
+    color: var(--color-text);
+    width: 45%;
+    padding: 25px;
+    border: 3px solid #FB8E0B;
+    border-top-left-radius: 8%;
+    border-bottom-right-radius: 8%;
+    margin-top: 40px; 
+}
+.interests-name{
+    color:  #FB8E0B ;
+    font-size: 30px;
+    font-family: cursive; 
+}
+.skills-name{
+    text-align: center;
+}
+.buttonTop{
+    text-align: center;
+  animation-duration: 4s;
+  margin-right: 15px;
+}

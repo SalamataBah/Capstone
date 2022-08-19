@@ -17,10 +17,10 @@ export default function SuccesStories() {
             <h1>"Incredible Experience"</h1>
             <p>
               {" "}
-              Lorem ipo fuga nobis tenetur accusantium, dolorum perferendis eum
-              ab exercitationem. Vitae ex consequatur repellat tempora fuga,
-              aliquid dolorem nostrum laboriosam perspiciatis magni delectus
-              sint, obcaecati numquam sunt!{" "}
+              Meet and Match helped me find the best mentor and friend who could
+              assist me during job applications and interviews. The mentors and
+              mentees on this app are so friendly and helpful. I can't wait to
+              invite my friend to use this app!{" "}
             </p>
           </div>
           <div style={{ display: "flex", marginTop: "10px" }}>
@@ -35,8 +35,7 @@ export default function SuccesStories() {
               }}
             />
             <div className="manteeCont">
-              <h6>Mission </h6>
-              <p> Lorem Ipsum</p>
+              <h6>user1 </h6>
             </div>
           </div>
         </div>
@@ -46,10 +45,10 @@ export default function SuccesStories() {
             <h1>"Best Mentor Ever"</h1>
             <p>
               {" "}
-              Lorem ipo fuga nobis tenetur accusantium, dolorum perferendis eum
-              ab exercitationem. Vitae ex consequatur repellat tempora fuga,
-              aliquid dolorem nostrum laboriosam perspiciatis magni delectus
-              sint, obcaecati numquam sunt!{" "}
+              My favorite part about this app is the matching algorithm and how
+              accurate it can be. I also like that I can see other users on a
+              map and how far they are from me. It gives me an idea of who to
+              reach out!{" "}
             </p>
           </div>
           <div style={{ display: "flex", marginTop: "10px" }}>
@@ -64,8 +63,7 @@ export default function SuccesStories() {
               }}
             />
             <div className="manteeCont">
-              <h6>Mission </h6>
-              <p> Lorem Ipsum</p>
+              <h6>user2 </h6>
             </div>
           </div>
         </div>

@@ -21,17 +21,16 @@ const ProfileCard = ({
       <div className="user-info">
         <div className="container">
           <h2> {userInfo.username} </h2>
-          upload image here(placeholder)
           <br />
-          <img src={""} alt="" className="user-image"></img>
           <div className="information">
-            <p className="info active">Add more info</p>
-            <p className="info " onClick={onClickInterests}>
-              Interests
-            </p>
+            <p className="basic-info">Add more info </p>
+            <div className="button">
+              <p onClick={onClickInterests}>Add Your Interests</p>
+            </div>
           </div>
         </div>
         <div className="container">
+          <p className="basic-info">Edit basic info </p>
           <input
             className="input"
             type="text"
@@ -49,13 +48,13 @@ const ProfileCard = ({
           <input
             className="input"
             type="text"
-            placeholder="location"
+            placeholder="Industry"
             id="location"
           ></input>
           <br />
           <br />
           <div>
-            <label className="user-role">Add Your Role: </label>
+            <label className="basic-info">Add Your Role: </label>
             <select name="roles" id="roles" className="roles">
               <option value="mentee">Mentee</option>
               <option value="mentor">Mentor</option>
@@ -80,9 +79,9 @@ const ProfileCard = ({
                 </div>
               ))
             : null}
-          <button className="button" onClick={() => saveInfo()}>
+          <p className="button" onClick={() => saveInfo()}>
             Save
-          </button>
+          </p>
         </div>
       </div>
     </div>

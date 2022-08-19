@@ -13,14 +13,18 @@ function NavMob(isLoggedIn, onClickLogOut) {
             <Logo />
           </Link>
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="offcanvasNavbar" />
+        <Navbar.Toggle
+          className="toggle"
+          aria-controls="offcanvasNavbar"
+          background-color="white"
+        />
         <Navbar.Offcanvas
           id="offcanvasNavbar"
           aria-labelledby="offcanvasNavbarLabel"
           placement="end"
         >
           <Offcanvas.Header closeButton>
-            <Offcanvas.Title id="offcanvasNavbarLabel">M $ M</Offcanvas.Title>
+            <Offcanvas.Title id="offcanvasNavbarLabel">M & M</Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body>
             <Nav className="justify-content-end flex-grow-1 pe-3">

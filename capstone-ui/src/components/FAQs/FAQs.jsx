@@ -28,7 +28,7 @@ const data = {
 };
 
 const styles = {
-  bgColor: " #040C18",
+  bgColor: "#031B34 ",
   titleTextColor: "white",
   titleText: "center",
   rowTitleColor: "white",

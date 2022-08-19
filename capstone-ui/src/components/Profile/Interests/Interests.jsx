@@ -14,17 +14,15 @@ export default function Interests({
     <div className="interests" id="interests">
       <div className="user-interests">
         <div className="container">
-          <img></img>
-          <h2>{userInfo.username}</h2>
+          <h2>{userInfo.username}'s interests</h2>
           <div className="user-info">
-            <p className="user-profile" onClick={onClickProfile}>
-              Your Profile
+            <p className="button" onClick={onClickProfile}>
+              Go back to profile
             </p>
-            <p className="user-profile active">Interests</p>
           </div>
         </div>
-        <div className="container">
-          <p className="interests-names">Skills:{}</p>
+        <div className="container second">
+          <p className="interests-name">Skills:{}</p>
           {userInfo?.interests?.skills &&
           Array.isArray(userInfo.interests.skills)
             ? userInfo.interests.skills.map((skill, key) => (
@@ -52,9 +50,9 @@ export default function Interests({
                 </div>
               ))
             : null}
-          <button className="button" onClick={onEditInterests}>
+          <p className="button" onClick={onEditInterests}>
             Edit
-          </button>
+          </p>
         </div>
       </div>
     </div>

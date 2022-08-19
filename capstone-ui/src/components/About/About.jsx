@@ -22,8 +22,8 @@ function About() {
             <h4>Mission </h4>
             <p>
               {" "}
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem{" "}
+              Connect people around the world through their academic and
+              professional interests{" "}
             </p>
           </div>
         </div>
@@ -41,8 +41,8 @@ function About() {
             <h4>Values </h4>
             <p>
               {" "}
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem{" "}
+              Connect people around the world through their academic and
+              professional interests{" "}
             </p>
           </div>
         </div>
@@ -60,8 +60,8 @@ function About() {
             <h4>IMPACT </h4>
             <p>
               {" "}
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem{" "}
+              Connect people around the world through their academic and
+              professional interests{" "}
             </p>
           </div>
         </div>
