@@ -5,7 +5,7 @@
 * [Wireframes](#Wireframes)
 * [Schema](#Schema)
 * [Project_Plan](#Project_Plan)
-* [Final Product](#Final_Project)
+* [Final_Product](#Final_Project)
 	
 # Overview
 Description 
